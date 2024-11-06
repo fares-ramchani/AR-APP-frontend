@@ -1,12 +1,10 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 const landingScreen = () => {
-  return (
-    <View>
-      <Text>landingScreen</Text>
-    </View>
-  );
+  return <View></View>;
 };
+
+const styles = StyleSheet.create({});
 
 export default landingScreen;
