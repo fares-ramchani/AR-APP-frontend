@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ImageBackground,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -8,13 +8,13 @@ import {
   View,
 } from 'react-native';
 import {primary} from 'constants/Colors.ts';
+import Header from 'components/header/Header.tsx';
 
 const Signin = () => {
   return (
     <View style={styles.container}>
-      <ImageBackground
-        style={styles.imageBackground}
-        source={require('asssets/img/wave.png')}>
+      <ScrollView contentContainerStyle={styles.scrollview}>
+        <Header />
         <View style={styles.header}>
           <Text style={styles.title}>Signin</Text>
           <Text style={{color: 'gray'}}>
@@ -22,13 +22,7 @@ const Signin = () => {
           </Text>
         </View>
         <View style={styles.body}>
-          <View
-            style={{
-              alignItems: 'flex-start',
-              width: '100%',
-              height: '20%',
-              margin: 8,
-            }}>
+          <View style={styles.inputContainer}>
             <Text style={styles.subtitle}>Email adress</Text>
             <TextInput
               placeholderTextColor="gray"
@@ -37,13 +31,7 @@ const Signin = () => {
               keyboardType="email-address"
             />
           </View>
-          <View
-            style={{
-              alignItems: 'flex-start',
-              width: '100%',
-              height: '20%',
-              margin: 8,
-            }}>
+          <View style={styles.inputContainer}>
             <Text style={styles.subtitle}>Password</Text>
             <TextInput
               placeholderTextColor="gray"
@@ -53,13 +41,7 @@ const Signin = () => {
               secureTextEntry={true}
             />
           </View>
-          <View
-            style={{
-              alignItems: 'flex-end',
-              width: '100%',
-              height: '20%',
-              margin: 8,
-            }}>
+          <View style={[styles.inputContainer, {alignItems: 'flex-end'}]}>
             <Text style={{color: primary}}>Forgot password ?</Text>
           </View>
         </View>
@@ -75,7 +57,7 @@ const Signin = () => {
             <Text style={{color: primary}}>Signup</Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </ScrollView>
     </View>
   );
 };
@@ -85,17 +67,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
   },
+  scrollview: {
+    flexGrow: 1,
+    width: '100%',
+  },
   header: {
     width: '100%',
-    height: '20%',
-    marginTop: 80,
+    height: 80,
+    marginTop: 140,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
   body: {
     width: '100%',
-    height: '50%',
+    height: 400,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -103,7 +89,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     width: '100%',
-    height: '20%',
+    height: 80,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -140,9 +126,15 @@ const styles = StyleSheet.create({
 
     elevation: 10,
   },
+  inputContainer: {
+    alignItems: 'flex-start',
+    width: '100%',
+    height: '20%',
+    margin: 8,
+  },
   input: {
     width: '100%',
-    height: '80%',
+    height: 60,
     padding: 10,
     margin: 0,
     borderRadius: 10,
