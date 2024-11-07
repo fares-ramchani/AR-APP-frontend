@@ -19,7 +19,6 @@ const Signup = ({navigation} : {navigation : any}) => {
           <Text style={styles.title}>SignUp</Text>
           <Text style={{color: 'gray'}}>
             Signup to your registered account.
-            Signup to your registered account
           </Text>
         </View>
         <View style={styles.body}>
