@@ -16,12 +16,16 @@ const Signup = ({navigation}: {navigation: any}) => {
     isValid: false,
     errors: false,
   });
+  const navigationToScreenSignin= ()=>{
+    navigation.navigate('Signin', {name: 'Signin'})
+    
+  }
 
   const onNextStep = () => {
     console.log('next');
 
     if (!state.isValid) {
-      setState({isValid: false, errors: true});
+      setState({isValid: false, errors: false});
     } else {
       setState({isValid: false, errors: false});
     }
@@ -61,9 +65,9 @@ const Signup = ({navigation}: {navigation: any}) => {
               label="First Step"
               onNext={onNextStep}
               errors={state.errors}
-              nextBtnStyle={styles.button}  
+              nextBtnStyle={styles.buttonNext}  
               nextBtnTextStyle={styles.nextButtonText} >
-              <View style={{width: '100%'}}>
+              <View style={styles.containerProgressStep}>
                 <View style={styles.inputContainer}>
                   <Text style={styles.subtitle}>Email adress</Text>
                   <TextInput
@@ -95,9 +99,41 @@ const Signup = ({navigation}: {navigation: any}) => {
                 </View>
               </View>
             </ProgressStep>
-            <ProgressStep label="Second Step">
-              <View style={{alignItems: 'center'}}>
-                <Text>This is the content within step 2!</Text>
+            <ProgressStep label="Second Step"
+              nextBtnStyle={styles.buttonSubmit}  
+              nextBtnTextStyle={styles.nextButtonText}
+              previousBtnStyle={styles.buttonPrevious } 
+              previousBtnTextStyle={styles.PreviousButtonText}
+              onSubmit={navigationToScreenSignin}>
+               <View style={styles.containerProgressStep}>
+                <View style={styles.inputContainer}>
+                  <Text style={styles.subtitle}>Name</Text>
+                  <TextInput
+                    placeholderTextColor="gray"
+                    style={styles.input}
+                    placeholder="Name"
+                    keyboardType="email-address"
+                  />
+                </View>
+                <View style={styles.inputContainer}>
+                  <Text style={styles.subtitle}>Phone</Text>
+                  <TextInput
+                    placeholderTextColor="gray"
+                    style={styles.input}
+                    placeholder="Phone"
+                    keyboardType="phone-pad"
+                    secureTextEntry={true}
+                  />
+                </View>
+                <View style={styles.inputContainer}>
+                  <Text style={styles.subtitle}>Adress</Text>
+                  <TextInput
+                    placeholderTextColor="gray"
+                    style={styles.input}
+                    placeholder="Adress"
+                    keyboardType="default"
+                  />
+                </View>
               </View>
             </ProgressStep> 
           </ProgressSteps>
@@ -166,17 +202,55 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  button: {
+  containerProgressStep:{
+    width: '100%',
+    marginBottom:30
+  },
+  buttonNext: {
     paddingHorizontal: 20,
     paddingVertical: 10,
-    alignSelf: 'center',          
-    marginHorizontal:50,
+    alignSelf:'center',          
+    marginHorizontal:20,
     backgroundColor: primary,
     borderWidth: 1,
     borderColor: primary,
     borderRadius: 40,
+    position: 'absolute',       
+    bottom: 10,   
+    right:0,
+    left:-60,
+    width: 100,
+    shadowColor: primary,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
 
-    width: '100%',
+    elevation: 10,
+  },
+  buttonSubmit: {
+    backgroundColor: primary,
+    borderWidth: 1,
+    borderColor: primary,
+    borderRadius: 40,
+    width: 100,
+    shadowColor: primary,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 10,
+  },
+  buttonPrevious: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: primary,
+    borderRadius: 40,
     shadowColor: primary,
     shadowOffset: {
       width: 0,
@@ -189,6 +263,11 @@ const styles = StyleSheet.create({
   },
   nextButtonText:{
     color:'white',
+    textAlign:'center'
+
+  },
+  PreviousButtonText:{
+    color:primary,
     textAlign:'center'
 
   },
