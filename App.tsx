@@ -16,22 +16,20 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <View style={styles.AppView}>
-       <NavigationContainer>
-      <Stack.Navigator>
-      
-           <Stack.Screen
-          name="Signup"
-          component={Signup}
-          options={{title: 'Signup',headerShown:false}}
-        />
-            <Stack.Screen
-          name="Signin"
-          component={Signin}
-          options={{title: 'Signin',headerShown:false}}
-        />
-      
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Signup"
+            component={Signup}
+            options={{title: 'Signup', headerShown: false}}
+          />
+          <Stack.Screen
+            name="Signin"
+            component={Signin}
+            options={{title: 'Signin', headerShown: false}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
