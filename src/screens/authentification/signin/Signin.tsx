@@ -10,7 +10,7 @@ import {
 import {primary} from 'constants/Colors.ts';
 import Header from 'components/header/Header.tsx';
 
-const Signin = () => {
+const Signin = ({navigation} : {navigation : any}) => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollview}>
@@ -53,7 +53,9 @@ const Signin = () => {
             style={[
               styles.button,
               {backgroundColor: 'white', borderColor: primary},
-            ]}>
+            ]}   onPress={() =>
+              navigation.navigate('Signup', {name: 'Signup'})
+            }>
             <Text style={{color: primary}}>Signup</Text>
           </TouchableOpacity>
         </View>
