@@ -42,7 +42,9 @@ const Signin = ({navigation} : {navigation : any}) => {
             />
           </View>
           <View style={[styles.inputContainer, {alignItems: 'flex-end'}]}>
-            <Text style={{color: primary}}>Forgot password ?</Text>
+            <Text style={{color: primary}}  onPress={() =>
+              navigation.navigate('ForgetPasswordEmail', {name: 'ForgetPasswordEmail'})
+            }>Forgot password ?</Text>
           </View>
         </View>
         <View style={styles.footer}>
