@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef } from 'react';
 import {
   Image,
   ScrollView,
@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {primary} from 'constants/Colors.ts';
+import { primary } from 'constants/Colors.ts';
 import * as yup from 'yup';
-import {Formik} from 'formik';
+import { Formik, FormikErrors } from 'formik';
 
 const ForgetPasswordCodeVerificationSchema = yup.object().shape({
   Firstcode: yup
@@ -31,15 +31,31 @@ const ForgetPasswordCodeVerificationSchema = yup.object().shape({
     .required('Required'),
 });
 
-const NumberInputBox = React.forwardRef(
-  ({value, onChange, onKeyPress, error, touched, isValid}, ref) => (
+type FormValues = {
+  Firstcode: string;
+  Secondcode: string;
+  Thirdcode: string;
+  Fourthcode: string;
+};
+
+type NumberInputBoxProps = {
+  value: string;
+  onChange: (text: string) => void;
+  onKeyPress: (event: any) => void;
+  error: string | undefined;
+  touched: boolean | undefined;
+  isValid: boolean;
+};
+
+const NumberInputBox = React.forwardRef<TextInput, NumberInputBoxProps>(
+  ({ value, onChange, onKeyPress, error, touched, isValid }, ref) => (
     <View style={styles.box}>
       <TextInput
         ref={ref}
         style={[
           styles.input,
           {
-            backgroundColor: (error && !touched) || isValid ? '#fff1ef' : 'red',
+            backgroundColor: error && !touched ? 'red' : '#fff1ef',
           },
         ]}
         value={value}
@@ -49,16 +65,23 @@ const NumberInputBox = React.forwardRef(
         maxLength={1}
         textAlign="center"
       />
+      {error && touched && <Text style={styles.errorText}>{error}</Text>}
     </View>
   ),
 );
 
-const ForgetPasswordCodeVerification = ({navigation}) => {
-  const inputRefs = useRef([]);
-  const handleKeyPress = (e, name, index, values, setFieldValue) => {
+const ForgetPasswordCodeVerification = ({ navigation }: { navigation: any }) => {
+  const inputRefs = useRef<Array<TextInput | null>>([]);
+  const handleKeyPress = (
+    e: any,
+    name: keyof FormValues,
+    index: number,
+    values: FormValues,
+    setFieldValue: (field: keyof FormValues, value: string) => void
+  ) => {
     if (e.nativeEvent.key === 'Backspace' && values[name] === '' && index > 0) {
-      inputRefs.current[index - 1].focus();
-      setFieldValue(Object.keys(values)[index - 1], '');
+      inputRefs.current[index - 1]?.focus();
+      setFieldValue(Object.keys(values)[index - 1] as keyof FormValues, '');
     }
   };
 
@@ -74,10 +97,10 @@ const ForgetPasswordCodeVerification = ({navigation}) => {
       onSubmit={values => {
         console.log(values);
         navigation.navigate('ForgetPasswordRestPassword');
-      }}>
+      }}
+    >
       {({
         handleChange,
-        handleBlur,
         handleSubmit,
         values,
         errors,
@@ -101,7 +124,7 @@ const ForgetPasswordCodeVerification = ({navigation}) => {
               </View>
               <View style={styles.conatinerInput}>
                 <View style={styles.conatinerInput2}>
-                  {['Firstcode', 'Secondcode', 'Thirdcode', 'Fourthcode'].map(
+                  {(['Firstcode', 'Secondcode', 'Thirdcode', 'Fourthcode'] as const).map(
                     (name, index) => (
                       <View key={name} style={styles.inputWrapper}>
                         <NumberInputBox
@@ -110,7 +133,7 @@ const ForgetPasswordCodeVerification = ({navigation}) => {
                           onChange={text => {
                             handleChange(name)(text);
                             if (text && index < inputRefs.current.length - 1) {
-                              inputRefs.current[index + 1].focus();
+                              inputRefs.current[index + 1]?.focus();
                             }
                           }}
                           onKeyPress={e =>
@@ -135,8 +158,8 @@ const ForgetPasswordCodeVerification = ({navigation}) => {
                 </View>
               </View>
               <View style={styles.conatinerButtom}>
-                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                  <Text style={{color: 'white'}}>Verify</Text>
+                <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
+                  <Text style={{ color: 'white' }}>Verify</Text>
                 </TouchableOpacity>
               </View>
             </View>
