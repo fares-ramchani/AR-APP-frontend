@@ -7,6 +7,7 @@ apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
  * By default you don't need to apply any configuration, just uncomment the lines you need.
  */
 react {
+
     /* Folders */
     //   The root of your project, i.e. where "package.json" lives. Default is '../..'
     // root = file("../../")
@@ -110,7 +111,20 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    implementation project(':react-native-vector-icons')
 
+  // If your app supports Android versions before Ice Cream Sandwich (API level 14)
+  implementation 'com.facebook.fresco:animated-base-support:1.3.0'
+
+  // For animated GIF support
+  implementation 'com.facebook.fresco:animated-gif:3.1.3'
+
+  // For WebP support, including animated WebP
+  implementation 'com.facebook.fresco:animated-webp:3.1.3'
+  implementation 'com.facebook.fresco:webpsupport:3.1.3'
+
+  // For WebP support, without animations
+  implementation 'com.facebook.fresco:webpsupport:3.1.3'
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
@@ -118,3 +132,4 @@ dependencies {
     }
      implementation project(':react-native-vector-icons')
 }
+
