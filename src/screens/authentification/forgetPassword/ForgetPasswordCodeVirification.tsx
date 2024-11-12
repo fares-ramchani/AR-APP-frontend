@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Image,
   ScrollView,
@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { primary } from 'constants/Colors.ts';
+import {primary} from 'constants/Colors.ts';
 import * as yup from 'yup';
-import { Formik, FormikErrors } from 'formik';
+import {Formik, FormikErrors} from 'formik';
 
 const ForgetPasswordCodeVerificationSchema = yup.object().shape({
   Firstcode: yup
@@ -48,14 +48,14 @@ type NumberInputBoxProps = {
 };
 
 const NumberInputBox = React.forwardRef<TextInput, NumberInputBoxProps>(
-  ({ value, onChange, onKeyPress, error, touched, isValid }, ref) => (
+  ({value, onChange, onKeyPress, error, touched, isValid}, ref) => (
     <View style={styles.box}>
       <TextInput
         ref={ref}
         style={[
           styles.input,
           {
-            backgroundColor: error && !touched ? 'red' : '#fff1ef',
+            backgroundColor: (!error && !touched)||isValid ? '#fff1ef' : 'red',
           },
         ]}
         value={value}
@@ -70,21 +70,20 @@ const NumberInputBox = React.forwardRef<TextInput, NumberInputBoxProps>(
   ),
 );
 
-const ForgetPasswordCodeVerification = ({ navigation }: { navigation: any }) => {
+const ForgetPasswordCodeVerification = ({navigation}: {navigation: any}) => {
   const inputRefs = useRef<Array<TextInput | null>>([]);
   const handleKeyPress = (
     e: any,
     name: keyof FormValues,
     index: number,
     values: FormValues,
-    setFieldValue: (field: keyof FormValues, value: string) => void
+    setFieldValue: (field: keyof FormValues, value: string) => void,
   ) => {
     if (e.nativeEvent.key === 'Backspace' && values[name] === '' && index > 0) {
       inputRefs.current[index - 1]?.focus();
       setFieldValue(Object.keys(values)[index - 1] as keyof FormValues, '');
     }
   };
-
   return (
     <Formik
       initialValues={{
@@ -97,8 +96,7 @@ const ForgetPasswordCodeVerification = ({ navigation }: { navigation: any }) => 
       onSubmit={values => {
         console.log(values);
         navigation.navigate('ForgetPasswordRestPassword');
-      }}
-    >
+      }}>
       {({
         handleChange,
         handleSubmit,
@@ -112,7 +110,7 @@ const ForgetPasswordCodeVerification = ({ navigation }: { navigation: any }) => 
           <ScrollView contentContainerStyle={styles.scrollview}>
             <View style={styles.header}>
               <Image
-                source={require('asssets/img/Forgot-password-cuate.png')}
+                source={require('asssets/img/forget-password.png')}
                 style={styles.imageStyle}
               />
             </View>
@@ -124,42 +122,44 @@ const ForgetPasswordCodeVerification = ({ navigation }: { navigation: any }) => 
               </View>
               <View style={styles.conatinerInput}>
                 <View style={styles.conatinerInput2}>
-                  {(['Firstcode', 'Secondcode', 'Thirdcode', 'Fourthcode'] as const).map(
-                    (name, index) => (
-                      <View key={name} style={styles.inputWrapper}>
-                        <NumberInputBox
-                          ref={el => (inputRefs.current[index] = el)}
-                          value={values[name]}
-                          onChange={text => {
-                            handleChange(name)(text);
-                            if (text && index < inputRefs.current.length - 1) {
-                              inputRefs.current[index + 1]?.focus();
-                            }
-                          }}
-                          onKeyPress={e =>
-                            handleKeyPress(
-                              e,
-                              name,
-                              index,
-                              values,
-                              setFieldValue,
-                            )
+                  {(
+                    [
+                      'Firstcode',
+                      'Secondcode',
+                      'Thirdcode',
+                      'Fourthcode',
+                    ] as const
+                  ).map((name, index) => (
+                    <View key={name} style={styles.inputWrapper}>
+                      <NumberInputBox
+                        ref={el => (inputRefs.current[index] = el)}
+                        value={values[name]}
+                        onChange={text => {
+                          handleChange(name)(text);
+                          if (text && index < inputRefs.current.length - 1) {
+                            inputRefs.current[index + 1]?.focus();
                           }
-                          error={errors[name]}
-                          touched={touched[name]}
-                          isValid={isValid}
-                        />
-                      </View>
-                    ),
-                  )}
+                        }}
+                        onKeyPress={e =>
+                          handleKeyPress(e, name, index, values, setFieldValue)
+                        }
+                        error={errors[name]}
+                        touched={touched[name]}
+                        isValid={isValid}
+                      />
+                    </View>
+                  ))}
                 </View>
                 <View style={styles.textcontainer}>
                   <Text style={styles.textStyle2}>Resend Code</Text>
                 </View>
               </View>
               <View style={styles.conatinerButtom}>
-                <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
-                  <Text style={{ color: 'white' }}>Verify</Text>
+                <TouchableOpacity
+                  style={[styles.button, {opacity: isValid ? 1 : 0.7}]}
+                  disabled={!isValid}
+                  onPress={() => handleSubmit()}>
+                  <Text style={{color: 'white'}}>Verify</Text>
                 </TouchableOpacity>
               </View>
             </View>

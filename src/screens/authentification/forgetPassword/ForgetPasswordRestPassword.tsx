@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   ScrollView,
@@ -36,8 +36,9 @@ const ForgetPasswordRestPassword = ({navigation}: {navigation: any}) => {
           <ScrollView contentContainerStyle={styles.scrollview}>
             <View style={styles.header}>
               <Image
-                source={require('asssets/img/Forgot-password-cuate.png')}
-                style={styles.imageStyle}></Image>
+                source={require('asssets/img/forget-password.png')}
+                style={styles.imageStyle}
+              />
             </View>
             <View style={styles.body}>
               <View style={styles.textcontainer}>

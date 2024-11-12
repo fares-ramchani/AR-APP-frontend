@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   ScrollView,
@@ -39,8 +39,9 @@ const ForgetPasswordEmail = ({navigation}: {navigation: any}) => {
           <ScrollView contentContainerStyle={styles.scrollview}>
             <View style={styles.header}>
               <Image
-                source={require('asssets/img/Forgot-password-cuate.png')}
-                style={styles.imageStyle}></Image>
+                source={require('asssets/img/forget-password.png')}
+                style={styles.imageStyle}
+              />
             </View>
             <View style={styles.body}>
               <View style={styles.textcontainer}>
@@ -67,6 +68,7 @@ const ForgetPasswordEmail = ({navigation}: {navigation: any}) => {
                   onBlur={handleBlur('email')}
                   value={values.email}
                 />
+
                 {errors.email && touched.email && (
                   <Text style={styles.errorText}>{errors.email}</Text>
                 )}
@@ -135,7 +137,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-
     elevation: 30,
   },
   textcontainer: {

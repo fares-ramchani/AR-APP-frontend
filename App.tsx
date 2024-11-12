@@ -15,6 +15,7 @@ import ForgetPasswordEmail from 'screens/authentification/forgetPassword/ForgetP
 import ForgetPasswordCodeVirification from 'screens/authentification/forgetPassword/ForgetPasswordCodeVirification.tsx';
 import ForgetPasswordRestPassword from 'screens/authentification/forgetPassword/ForgetPasswordRestPassword.tsx';
 import {primary} from 'constants/Colors.ts';
+import BottomBar from 'components/bottomBar/BottomBar.tsx';
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -69,6 +70,11 @@ function App() {
                 backgroundColor: primary,
               },
             }}
+          />
+            <Stack.Screen
+            name="BottomBar"
+            component={BottomBar}
+            options={{title: 'BottomBar', headerShown: false}}
           />
         </Stack.Navigator>
       </NavigationContainer>
