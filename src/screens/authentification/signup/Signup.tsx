@@ -16,10 +16,9 @@ const Signup = ({navigation}: {navigation: any}) => {
     isValid: false,
     errors: false,
   });
-  const navigationToScreenSignin= ()=>{
-    navigation.navigate('Signin', {name: 'Signin'})
-    
-  }
+  const navigationToScreenSignin = () => {
+    navigation.navigate('Signin', {name: 'Signin'});
+  };
 
   const onNextStep = () => {
     console.log('next');
@@ -59,84 +58,85 @@ const Signup = ({navigation}: {navigation: any}) => {
           </Text>
         </View>
         <View style={styles.body}>
-        <View style={{flex: 1}}>
-          <ProgressSteps >
-            <ProgressStep
-              label="First Step"
-              onNext={onNextStep}
-              errors={state.errors}
-              nextBtnStyle={styles.buttonNext}  
-              nextBtnTextStyle={styles.nextButtonText} >
-              <View style={styles.containerProgressStep}>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.subtitle}>Email adress</Text>
-                  <TextInput
-                    placeholderTextColor="gray"
-                    style={styles.input}
-                    placeholder="Email"
-                    keyboardType="email-address"
-                  />
+          <View style={{flex: 1}}>
+            <ProgressSteps>
+              <ProgressStep
+                label="First Step"
+                onNext={onNextStep}
+                errors={state.errors}
+                nextBtnStyle={styles.buttonNext}
+                nextBtnTextStyle={styles.nextButtonText}>
+                <View style={styles.containerProgressStep}>
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.subtitle}>Email adress</Text>
+                    <TextInput
+                      placeholderTextColor="gray"
+                      style={styles.input}
+                      placeholder="Email"
+                      keyboardType="email-address"
+                    />
+                  </View>
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.subtitle}>Password</Text>
+                    <TextInput
+                      placeholderTextColor="gray"
+                      style={styles.input}
+                      placeholder="Password"
+                      keyboardType="default"
+                      secureTextEntry={true}
+                    />
+                  </View>
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.subtitle}>Confirm Password</Text>
+                    <TextInput
+                      placeholderTextColor="gray"
+                      style={styles.input}
+                      placeholder="Confirm Password"
+                      keyboardType="default"
+                      secureTextEntry={true}
+                    />
+                  </View>
                 </View>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.subtitle}>Password</Text>
-                  <TextInput
-                    placeholderTextColor="gray"
-                    style={styles.input}
-                    placeholder="Password"
-                    keyboardType="default"
-                    secureTextEntry={true}
-                  />
+              </ProgressStep>
+              <ProgressStep
+                label="Second Step"
+                nextBtnStyle={styles.buttonSubmit}
+                nextBtnTextStyle={styles.nextButtonText}
+                previousBtnStyle={styles.buttonPrevious}
+                previousBtnTextStyle={styles.PreviousButtonText}
+                onSubmit={navigationToScreenSignin}>
+                <View style={styles.containerProgressStep}>
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.subtitle}>Name</Text>
+                    <TextInput
+                      placeholderTextColor="gray"
+                      style={styles.input}
+                      placeholder="Name"
+                      keyboardType="email-address"
+                    />
+                  </View>
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.subtitle}>Phone</Text>
+                    <TextInput
+                      placeholderTextColor="gray"
+                      style={styles.input}
+                      placeholder="Phone"
+                      keyboardType="phone-pad"
+                      secureTextEntry={true}
+                    />
+                  </View>
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.subtitle}>Adress</Text>
+                    <TextInput
+                      placeholderTextColor="gray"
+                      style={styles.input}
+                      placeholder="Adress"
+                      keyboardType="default"
+                    />
+                  </View>
                 </View>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.subtitle}>Confirm Password</Text>
-                  <TextInput
-                    placeholderTextColor="gray"
-                    style={styles.input}
-                    placeholder="Confirm Password"
-                    keyboardType="default"
-                    secureTextEntry={true}
-                  />
-                </View>
-              </View>
-            </ProgressStep>
-            <ProgressStep label="Second Step"
-              nextBtnStyle={styles.buttonSubmit}  
-              nextBtnTextStyle={styles.nextButtonText}
-              previousBtnStyle={styles.buttonPrevious } 
-              previousBtnTextStyle={styles.PreviousButtonText}
-              onSubmit={navigationToScreenSignin}>
-               <View style={styles.containerProgressStep}>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.subtitle}>Name</Text>
-                  <TextInput
-                    placeholderTextColor="gray"
-                    style={styles.input}
-                    placeholder="Name"
-                    keyboardType="email-address"
-                  />
-                </View>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.subtitle}>Phone</Text>
-                  <TextInput
-                    placeholderTextColor="gray"
-                    style={styles.input}
-                    placeholder="Phone"
-                    keyboardType="phone-pad"
-                    secureTextEntry={true}
-                  />
-                </View>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.subtitle}>Adress</Text>
-                  <TextInput
-                    placeholderTextColor="gray"
-                    style={styles.input}
-                    placeholder="Adress"
-                    keyboardType="default"
-                  />
-                </View>
-              </View>
-            </ProgressStep> 
-          </ProgressSteps>
+              </ProgressStep>
+            </ProgressSteps>
           </View>
         </View>
         {/* <View style={styles.footer}>
@@ -179,7 +179,6 @@ const styles = StyleSheet.create({
     flex: 5,
     width: '100%',
     padding: 20,
-
   },
   footer: {
     flexDirection: 'row',
@@ -202,23 +201,23 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  containerProgressStep:{
+  containerProgressStep: {
     width: '100%',
-    marginBottom:30
+    marginBottom: 30,
   },
   buttonNext: {
     paddingHorizontal: 20,
     paddingVertical: 10,
-    alignSelf:'center',          
-    marginHorizontal:20,
+    alignSelf: 'center',
+    marginHorizontal: 20,
     backgroundColor: primary,
     borderWidth: 1,
     borderColor: primary,
     borderRadius: 40,
-    position: 'absolute',       
-    bottom: 10,   
-    right:0,
-    left:-60,
+    position: 'absolute',
+    bottom: 10,
+    right: 0,
+    left: -60,
     width: 100,
     shadowColor: primary,
     shadowOffset: {
@@ -261,15 +260,13 @@ const styles = StyleSheet.create({
 
     elevation: 10,
   },
-  nextButtonText:{
-    color:'white',
-    textAlign:'center'
-
+  nextButtonText: {
+    color: 'white',
+    textAlign: 'center',
   },
-  PreviousButtonText:{
-    color:primary,
-    textAlign:'center'
-
+  PreviousButtonText: {
+    color: primary,
+    textAlign: 'center',
   },
 
   inputContainer: {
@@ -283,7 +280,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: primary,
     backgroundColor: '#fff1ef',
-    marginTop:3
+    marginTop: 3,
   },
 });
 export default Signup;

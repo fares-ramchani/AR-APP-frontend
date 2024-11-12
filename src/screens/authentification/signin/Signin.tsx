@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -8,77 +9,148 @@ import {
   View,
 } from 'react-native';
 import {primary} from 'constants/Colors.ts';
-import Header from 'components/header/Header.tsx';
-
-const Signin = ({navigation} : {navigation : any}) => {
+import LinearGradient from 'react-native-linear-gradient';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+const Signin = ({navigation}: {navigation: any}) => {
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollview}>
-        <Header />
-        <View style={styles.header}>
-          <Text style={styles.title}>Signin</Text>
-          <Text style={{color: 'gray'}}>
-            Signin to your registered account.
-          </Text>
-        </View>
-        <View style={styles.body}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.subtitle}>Email adress</Text>
-            <TextInput
-              placeholderTextColor="gray"
-              style={styles.input}
-              placeholder="Email"
-              keyboardType="email-address"
-            />
+    <ScrollView contentContainerStyle={styles.scrollview}>
+      <LinearGradient
+        colors={['white', 'white', 'white', 'white', '#ededed']}
+        style={styles.container}>
+        <LinearGradient
+          colors={['white', 'white', 'white', 'white', 'white']}
+          style={styles.login}>
+          <View style={styles.header}>
+            <View style={styles.images}>
+              <Image
+                source={require('asssets/img/loginarfy.png')}
+                style={styles.loginimage}
+              />
+            </View>
           </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.subtitle}>Password</Text>
-            <TextInput
-              placeholderTextColor="gray"
-              style={styles.input}
-              placeholder="Password"
-              keyboardType="default"
-              secureTextEntry={true}
-            />
+          <View style={styles.body}>
+              <Text style={styles.title}>Login</Text>
+            <Text style={[styles.subtitle, {fontSize: 12}]}>
+              And place your furniture with ease.
+            </Text>
+            <View style={styles.inputContainer}>
+              <Text style={styles.subtitle}>Email</Text>
+              <TextInput
+                placeholderTextColor="gray"
+                style={styles.input}
+                placeholder="Email adress"
+                keyboardType="email-address"
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.subtitle}>Password</Text>
+              <TextInput
+                placeholderTextColor="gray"
+                style={styles.input}
+                placeholder="Password"
+                keyboardType="default"
+                secureTextEntry={true}
+              />
+            </View>
+            <View style={[styles.inputContainer, {alignItems: 'flex-end'}]}>
+              <Text
+                style={{color: '#2da0ff'}}
+                onPress={() =>
+                  navigation.navigate('ForgetPasswordEmail', {
+                    name: 'ForgetPasswordEmail',
+                  })
+                }>
+                Forgot password ?
+              </Text>
+            </View>
+            <View style={styles.buttons}>
+              <TouchableOpacity style={styles.button}>
+                <Text style={{color: 'white'}}>Signin</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  {backgroundColor: 'white', borderColor: primary},
+                ]}
+                onPress={() => navigation.navigate('Signup', {name: 'Signup'})}>
+                <Text style={{color: primary}}>Signup</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={[styles.inputContainer, {alignItems: 'flex-end'}]}>
-            <Text style={{color: primary}}  onPress={() =>
-              navigation.navigate('ForgetPasswordEmail', {name: 'ForgetPasswordEmail'})
-            }>Forgot password ?</Text>
+          <View style={styles.footer}>
+            <TouchableOpacity style={styles.iconBox}>
+              <FontAwesome name="facebook" size={20} color={'#2da0ff'} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconBox}>
+              <FontAwesome name="google" size={20} color={'red'} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconBox}>
+              <FontAwesome name="twitter" size={20} color={'#2da0ff'} />
+            </TouchableOpacity>
           </View>
-        </View>
-        <View style={styles.footer}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={{color: 'white'}}>Signin</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.button,
-              {backgroundColor: 'white', borderColor: primary},
-            ]}   onPress={() =>
-              navigation.navigate('Signup', {name: 'Signup'})
-            }>
-            <Text style={{color: primary}}>Signup</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </View>
+        </LinearGradient>
+      </LinearGradient>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    paddingVertical: 50,
+    paddingHorizontal: 15,
   },
   scrollview: {
     flexGrow: 1,
     width: '100%',
   },
+  images: {
+    width: '100%',
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 120,
+  },
+  loginimage: {
+    width: '60%',
+    height: 160,
+    alignSelf: 'flex-end',
+    marginTop: 20,
+  },
+  logo: {
+    width: '20%',
+    height: 40,
+    position: 'relative',
+  },
+  login: {
+    // backgroundColor: primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderBottomColor: '#ededed',
+    borderRightColor: '#ededed',
+    borderLeftColor: '#ededed',
+    borderTopColor: primary,
+    borderTopWidth: 6,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 0,
+    width: '100%',
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 4,
+  },
   header: {
     width: '100%',
-    height: 80,
-    marginTop: 140,
+    height: 100,
+    marginTop: 40,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'flex-start',
@@ -86,30 +158,50 @@ const styles = StyleSheet.create({
   body: {
     width: '100%',
     height: 400,
-    padding: 10,
+    padding: 0,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 50,
   },
   footer: {
     flexDirection: 'row',
-    width: '100%',
+    width: '70%',
     height: 80,
-    padding: 10,
+    padding: 0,
+    marginTop: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    borderColor: '#f9f9f9',
+    borderTopWidth: 1,
+  },
+  iconBox: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: primary,
+    borderBottomWidth: 1,
+    borderRadius: 10,
+    padding: 18,
+    margin: 4,
+    width: 60,
   },
   title: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: 'bold',
-    color: primary,
+    color: 'black',
   },
   subtitle: {
     fontSize: 16,
-    color: primary,
+    color: '#c8c7c7',
   },
   imageBackground: {
     flex: 1,
     padding: 20,
+  },
+  buttons: {
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   button: {
     alignItems: 'center',
@@ -142,8 +234,8 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 0,
     borderRadius: 10,
-    borderColor: primary,
-    backgroundColor: '#fff1ef',
+    borderColor: 'white',
+    backgroundColor: '#f9f9f9',
   },
 });
 export default Signin;
