@@ -1,4 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useRef} from 'react';
 import {
   Image,
   ScrollView,
@@ -8,9 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {primary} from 'constants/Colors.ts';
+import {inputbackgroundColor, primary, secondary} from 'constants/Colors.ts';
 import * as yup from 'yup';
-import {Formik, FormikErrors} from 'formik';
+import {Formik} from 'formik';
 
 const ForgetPasswordCodeVerificationSchema = yup.object().shape({
   Firstcode: yup
@@ -55,7 +56,10 @@ const NumberInputBox = React.forwardRef<TextInput, NumberInputBoxProps>(
         style={[
           styles.input,
           {
-            backgroundColor: (!error && !touched)||isValid ? '#fff1ef' : 'red',
+            backgroundColor:
+              (!error && !touched) || isValid
+                ? inputbackgroundColor
+                : secondary,
           },
         ]}
         value={value}
@@ -117,7 +121,7 @@ const ForgetPasswordCodeVerification = ({navigation}: {navigation: any}) => {
             <View style={styles.body}>
               <View style={styles.textcontainer}>
                 <Text style={styles.textStyle}>
-                  Please Enter The 4 Digit Code Sent To example@gmail.com
+                  Please Enter The 4 Digit Code Sent To Your Email .
                 </Text>
               </View>
               <View style={styles.conatinerInput}>
@@ -159,7 +163,9 @@ const ForgetPasswordCodeVerification = ({navigation}: {navigation: any}) => {
                   style={[styles.button, {opacity: isValid ? 1 : 0.7}]}
                   disabled={!isValid}
                   onPress={() => handleSubmit()}>
-                  <Text style={{color: 'white'}}>Verify</Text>
+                  <Text style={{fontSize: 16, fontWeight: 500, color: 'white'}}>
+                    Verify
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -254,9 +260,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: primary,
     borderRadius: 40,
-    padding: 10,
+    padding: 12,
     margin: 6,
-    width: '80%',
+    width: '60%',
     shadowColor: primary,
     shadowOffset: {
       width: 0,

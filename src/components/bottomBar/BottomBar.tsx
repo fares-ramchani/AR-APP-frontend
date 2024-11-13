@@ -1,19 +1,13 @@
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable react-native/no-inline-styles */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {useEffect, useRef} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  useColorScheme,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native';
 import FavoritesScreen from 'screens/favoritesScreen/FavoritesScreen.tsx';
 import HomeScreen from 'screens/homescreen/HomeScreen.tsx';
 import ProductsScreen from 'screens/productsScreen/ProductsScreen.tsx';
 import * as Animatable from 'react-native-animatable';
 import Icon, {Icons} from 'constants/Icons.tsx';
-import {useTheme} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {primary} from 'constants/Colors.ts';
 

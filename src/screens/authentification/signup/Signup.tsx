@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import {
+  Image,
+  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import {primary} from 'constants/Colors.ts';
-import Header from 'components/header/Header.tsx';
+import {green, primary} from 'constants/Colors.ts';
 import {ProgressSteps, ProgressStep} from 'react-native-progress-steps';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Signup = ({navigation}: {navigation: any}) => {
   const [state, setState] = useState({
@@ -17,7 +18,7 @@ const Signup = ({navigation}: {navigation: any}) => {
     errors: false,
   });
   const navigationToScreenSignin = () => {
-    navigation.navigate('Signin', {name: 'Signin'});
+    navigation.navigate('BottomBar', {name: 'BottomBar'});
   };
 
   const onNextStep = () => {
@@ -30,155 +31,192 @@ const Signup = ({navigation}: {navigation: any}) => {
     }
   };
   return (
-    //   <View style={{ flex: 1,flexDirection:'column-reverse'}}>
-    //   <ProgressSteps>
-    //   <ProgressStep
-    //     label="First Step"
-    //     onNext={onNextStep}
-    //     errors={state.errors}>
-    //     <View style={{alignItems: 'center'}}>
-    //       <Text>This is the content within step 1!</Text>
-    //     </View>
-    //   </ProgressStep>
-    //   <ProgressStep label="Second Step">
-    //     <View style={{alignItems: 'center'}}>
-    //       <Text>This is the content within step 2!</Text>
-    //     </View>
-    //   </ProgressStep>
-    // </ProgressSteps>
-    // </View>
-
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollview}>
-        <Header />
-        <View style={styles.header}>
-          <Text style={styles.title}>SignUp</Text>
-          <Text style={{color: 'gray'}}>
-            Signup to your registered account.
-          </Text>
-        </View>
-        <View style={styles.body}>
-          <View style={{flex: 1}}>
-            <ProgressSteps>
-              <ProgressStep
-                label="First Step"
-                onNext={onNextStep}
-                errors={state.errors}
-                nextBtnStyle={styles.buttonNext}
-                nextBtnTextStyle={styles.nextButtonText}>
-                <View style={styles.containerProgressStep}>
-                  <View style={styles.inputContainer}>
-                    <Text style={styles.subtitle}>Email adress</Text>
-                    <TextInput
-                      placeholderTextColor="gray"
-                      style={styles.input}
-                      placeholder="Email"
-                      keyboardType="email-address"
-                    />
+    <ScrollView contentContainerStyle={styles.scrollview}>
+      <ImageBackground
+        source={require('asssets/img/wall.png')}
+        style={styles.container}>
+        <LinearGradient
+          colors={[
+            '#ffeedf',
+            'transparent',
+            'transparent',
+            'transparent',
+            'transparent',
+            'gray',
+          ]}
+          style={styles.linear}>
+          <LinearGradient
+            colors={['white', 'white', 'white', 'white', 'white']}
+            style={styles.signup}>
+            <View style={styles.header}>
+              <View style={styles.images}>
+                <Image
+                  source={require('asssets/img/signup.png')}
+                  style={styles.signupimage}
+                />
+              </View>
+            </View>
+            <View style={styles.body}>
+              <Text style={styles.title}>Signup</Text>
+              <ProgressSteps
+                activeStepIconBorderColor={primary}
+                completedProgressBarColor={green}
+                completedStepIconColor={green}
+                completedLabelColor={green}
+                activeLabelColor={primary}>
+                <ProgressStep
+                  label="First Step"
+                  onNext={onNextStep}
+                  errors={state.errors}
+                  nextBtnStyle={styles.buttonNext}
+                  nextBtnTextStyle={styles.nextButtonText}>
+                  <View style={styles.containerProgressStep}>
+                    <View style={styles.inputContainer}>
+                      <Text style={styles.subtitle}>Name</Text>
+                      <TextInput
+                        placeholderTextColor="gray"
+                        style={styles.input}
+                        placeholder="Full name"
+                        keyboardType="email-address"
+                      />
+                    </View>
+                    <View style={styles.inputContainer}>
+                      <Text style={styles.subtitle}>Phone</Text>
+                      <TextInput
+                        placeholderTextColor="gray"
+                        style={styles.input}
+                        placeholder="Phone number"
+                        keyboardType="phone-pad"
+                        secureTextEntry={true}
+                      />
+                    </View>
+                    <View style={styles.inputContainer}>
+                      <Text style={styles.subtitle}>Adress</Text>
+                      <TextInput
+                        placeholderTextColor="gray"
+                        style={styles.input}
+                        placeholder="Adress"
+                        keyboardType="default"
+                      />
+                    </View>
                   </View>
-                  <View style={styles.inputContainer}>
-                    <Text style={styles.subtitle}>Password</Text>
-                    <TextInput
-                      placeholderTextColor="gray"
-                      style={styles.input}
-                      placeholder="Password"
-                      keyboardType="default"
-                      secureTextEntry={true}
-                    />
+                </ProgressStep>
+                <ProgressStep
+                  label="Second Step"
+                  nextBtnStyle={styles.buttonSubmit}
+                  nextBtnTextStyle={styles.nextButtonText}
+                  previousBtnStyle={styles.buttonPrevious}
+                  previousBtnTextStyle={styles.PreviousButtonText}
+                  finishBtnText={'Signup'}
+                  onSubmit={navigationToScreenSignin}>
+                  <View style={styles.containerProgressStep}>
+                    <View style={styles.inputContainer}>
+                      <Text style={styles.subtitle}>Email adress</Text>
+                      <TextInput
+                        placeholderTextColor="gray"
+                        style={styles.input}
+                        placeholder="Email"
+                        keyboardType="email-address"
+                      />
+                    </View>
+                    <View style={styles.inputContainer}>
+                      <Text style={styles.subtitle}>Password</Text>
+                      <TextInput
+                        placeholderTextColor="gray"
+                        style={styles.input}
+                        placeholder="Password"
+                        keyboardType="default"
+                        secureTextEntry={true}
+                      />
+                    </View>
+                    <View style={styles.inputContainer}>
+                      <Text style={styles.subtitle}>Confirm Password</Text>
+                      <TextInput
+                        placeholderTextColor="gray"
+                        style={styles.input}
+                        placeholder="Confirm Password"
+                        keyboardType="default"
+                        secureTextEntry={true}
+                      />
+                    </View>
                   </View>
-                  <View style={styles.inputContainer}>
-                    <Text style={styles.subtitle}>Confirm Password</Text>
-                    <TextInput
-                      placeholderTextColor="gray"
-                      style={styles.input}
-                      placeholder="Confirm Password"
-                      keyboardType="default"
-                      secureTextEntry={true}
-                    />
-                  </View>
-                </View>
-              </ProgressStep>
-              <ProgressStep
-                label="Second Step"
-                nextBtnStyle={styles.buttonSubmit}
-                nextBtnTextStyle={styles.nextButtonText}
-                previousBtnStyle={styles.buttonPrevious}
-                previousBtnTextStyle={styles.PreviousButtonText}
-                onSubmit={navigationToScreenSignin}>
-                <View style={styles.containerProgressStep}>
-                  <View style={styles.inputContainer}>
-                    <Text style={styles.subtitle}>Name</Text>
-                    <TextInput
-                      placeholderTextColor="gray"
-                      style={styles.input}
-                      placeholder="Name"
-                      keyboardType="email-address"
-                    />
-                  </View>
-                  <View style={styles.inputContainer}>
-                    <Text style={styles.subtitle}>Phone</Text>
-                    <TextInput
-                      placeholderTextColor="gray"
-                      style={styles.input}
-                      placeholder="Phone"
-                      keyboardType="phone-pad"
-                      secureTextEntry={true}
-                    />
-                  </View>
-                  <View style={styles.inputContainer}>
-                    <Text style={styles.subtitle}>Adress</Text>
-                    <TextInput
-                      placeholderTextColor="gray"
-                      style={styles.input}
-                      placeholder="Adress"
-                      keyboardType="default"
-                    />
-                  </View>
-                </View>
-              </ProgressStep>
-            </ProgressSteps>
-          </View>
-        </View>
-        {/* <View style={styles.footer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Signin', {name: 'Signin'})}>
-            <Text style={{color: 'white'}}>Next</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.button,
-              {backgroundColor: 'white', borderColor: primary},
-            ]}>
-            <Text style={{color: primary}}>Signin</Text>
-          </TouchableOpacity>
-        </View> */}
-      </ScrollView>
-    </View>
+                </ProgressStep>
+              </ProgressSteps>
+            </View>
+          </LinearGradient>
+        </LinearGradient>
+      </ImageBackground>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    paddingVertical: 50,
+    paddingHorizontal: 15,
   },
   scrollview: {
     flexGrow: 1,
     width: '100%',
   },
-  header: {
-    flex: 1,
+  linear: {
     width: '100%',
-    marginTop: 110,
+    flex: 1,
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  signup: {
+    // backgroundColor: primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderBottomColor: '#ededed',
+    borderRightColor: '#ededed',
+    borderLeftColor: '#ededed',
+    borderTopColor: primary,
+    borderTopWidth: 6,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 0,
+    width: '100%',
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 4,
+  },
+  header: {
+    width: '100%',
+    height: 100,
+    marginTop: 40,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
-  body: {
-    flex: 5,
+  images: {
     width: '100%',
-    padding: 20,
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 120,
+  },
+  signupimage: {
+    width: '40%',
+    height: 160,
+    alignSelf: 'flex-end',
+    marginTop: 20,
+  },
+  body: {
+    width: '100%',
+    padding: 0,
+    justifyContent: 'center',
+    marginTop: 50,
   },
   footer: {
     flexDirection: 'row',
@@ -189,13 +227,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: 'bold',
-    color: primary,
+    color: 'black',
+    textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    color: primary,
+    color: '#c8c7c7',
   },
   imageBackground: {
     flex: 1,
@@ -271,16 +310,18 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     alignItems: 'flex-start',
+    width: '100%',
+    height: '26%',
+    margin: 8,
   },
   input: {
     width: '100%',
-    height: 55,
+    height: 60,
     padding: 10,
     margin: 0,
     borderRadius: 10,
-    borderColor: primary,
-    backgroundColor: '#fff1ef',
-    marginTop: 3,
+    borderColor: 'white',
+    backgroundColor: '#f9f9f9',
   },
 });
 export default Signup;
