@@ -1,6 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   Image,
+  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
@@ -8,88 +10,101 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {primary} from 'constants/Colors.ts';
+import {blue, primary} from 'constants/Colors.ts';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const Signin = ({navigation}: {navigation: any}) => {
   return (
     <ScrollView contentContainerStyle={styles.scrollview}>
-      <LinearGradient
-        colors={['white', 'white', 'white', 'white', '#ededed']}
+      <ImageBackground
+        source={require('asssets/img/wall.png')}
         style={styles.container}>
         <LinearGradient
-          colors={['white', 'white', 'white', 'white', 'white']}
-          style={styles.login}>
-          <View style={styles.header}>
-            <View style={styles.images}>
-              <Image
-                source={require('asssets/img/loginarfy.png')}
-                style={styles.loginimage}
-              />
+          colors={[
+            '#ffeedf',
+            'transparent',
+            'transparent',
+            'transparent',
+            'transparent',
+            'gray',
+          ]}
+          style={styles.linear}>
+          <LinearGradient
+            colors={['white', 'white', 'white', 'white', 'white']}
+            style={styles.login}>
+            <View style={styles.header}>
+              <View style={styles.images}>
+                <Image
+                  source={require('asssets/img/loginarfy.png')}
+                  style={styles.loginimage}
+                />
+              </View>
             </View>
-          </View>
-          <View style={styles.body}>
+            <View style={styles.body}>
               <Text style={styles.title}>Login</Text>
-            <Text style={[styles.subtitle, {fontSize: 12}]}>
-              And place your furniture with ease.
-            </Text>
-            <View style={styles.inputContainer}>
-              <Text style={styles.subtitle}>Email</Text>
-              <TextInput
-                placeholderTextColor="gray"
-                style={styles.input}
-                placeholder="Email adress"
-                keyboardType="email-address"
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.subtitle}>Password</Text>
-              <TextInput
-                placeholderTextColor="gray"
-                style={styles.input}
-                placeholder="Password"
-                keyboardType="default"
-                secureTextEntry={true}
-              />
-            </View>
-            <View style={[styles.inputContainer, {alignItems: 'flex-end'}]}>
-              <Text
-                style={{color: '#2da0ff'}}
-                onPress={() =>
-                  navigation.navigate('ForgetPasswordEmail', {
-                    name: 'ForgetPasswordEmail',
-                  })
-                }>
-                Forgot password ?
+              <Text style={[styles.subtitle, {fontSize: 12}]}>
+                And place your furniture with ease.
               </Text>
+              <View style={styles.inputContainer}>
+                <Text style={styles.subtitle}>Email</Text>
+                <TextInput
+                  placeholderTextColor="gray"
+                  style={styles.input}
+                  placeholder="Email adress"
+                  keyboardType="email-address"
+                />
+              </View>
+              <View style={styles.inputContainer}>
+                <Text style={styles.subtitle}>Password</Text>
+                <TextInput
+                  placeholderTextColor="gray"
+                  style={styles.input}
+                  placeholder="Password"
+                  keyboardType="default"
+                  secureTextEntry={true}
+                />
+              </View>
+              <View style={[styles.inputContainer, {alignItems: 'flex-end'}]}>
+                <Text
+                  style={{color: blue}}
+                  onPress={() =>
+                    navigation.navigate('ForgetPasswordEmail', {
+                      name: 'ForgetPasswordEmail',
+                    })
+                  }>
+                  Forgot password ?
+                </Text>
+              </View>
+              <View style={styles.buttons}>
+                <TouchableOpacity style={styles.button}>
+                  <Text style={{color: 'white'}}>Signin</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.button,
+                    {backgroundColor: 'white', borderColor: primary},
+                  ]}
+                  onPress={() =>
+                    navigation.navigate('Signup', {name: 'Signup'})
+                  }>
+                  <Text style={{color: primary}}>Signup</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={styles.buttons}>
-              <TouchableOpacity style={styles.button}>
-                <Text style={{color: 'white'}}>Signin</Text>
+            <View style={styles.footer}>
+              <TouchableOpacity style={styles.iconBox}>
+                <FontAwesome name="facebook" size={20} color={blue} />
               </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  {backgroundColor: 'white', borderColor: primary},
-                ]}
-                onPress={() => navigation.navigate('Signup', {name: 'Signup'})}>
-                <Text style={{color: primary}}>Signup</Text>
+              <TouchableOpacity style={styles.iconBox}>
+                <FontAwesome name="google" size={20} color={'red'} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.iconBox}>
+                <FontAwesome name="twitter" size={20} color={blue} />
               </TouchableOpacity>
             </View>
-          </View>
-          <View style={styles.footer}>
-            <TouchableOpacity style={styles.iconBox}>
-              <FontAwesome name="facebook" size={20} color={'#2da0ff'} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.iconBox}>
-              <FontAwesome name="google" size={20} color={'red'} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.iconBox}>
-              <FontAwesome name="twitter" size={20} color={'#2da0ff'} />
-            </TouchableOpacity>
-          </View>
+          </LinearGradient>
         </LinearGradient>
-      </LinearGradient>
+      </ImageBackground>
     </ScrollView>
   );
 };
@@ -103,6 +118,12 @@ const styles = StyleSheet.create({
   scrollview: {
     flexGrow: 1,
     width: '100%',
+  },
+  linear: {
+    width: '100%',
+    flex: 1,
+    alignItems: 'center',
+    borderRadius: 10,
   },
   images: {
     width: '100%',
@@ -128,9 +149,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderBottomColor: '#ededed',
-    borderRightColor: '#ededed',
-    borderLeftColor: '#ededed',
+    borderBottomColor: 'white',
+    borderRightColor: 'white',
+    borderLeftColor: 'white',
     borderTopColor: primary,
     borderTopWidth: 6,
     borderRadius: 10,
@@ -178,7 +199,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: primary,
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderRadius: 10,
     padding: 18,
     margin: 4,

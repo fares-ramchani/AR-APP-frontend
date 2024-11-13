@@ -1,1 +1,6 @@
-export { default as LandingScreen } from './landingscreen/landingScreen';
+export { default as LandingScreen } from './landingscreen/LandingScreen.tsx';
+export { default as Signin } from './authentification/signin/Signin.tsx';
+export { default as Signup } from './authentification/signup/Signup.tsx';
+export { default as ForgetPasswordEmail } from './authentification/forgetPassword/ForgetPasswordEmail.tsx';
+export { default as ForgetPasswordCodeVirification } from './authentification/forgetPassword/ForgetPasswordCodeVirification.tsx';
+export { default as ForgetPasswordRestPassword } from './authentification/forgetPassword/ForgetPasswordRestPassword.tsx';

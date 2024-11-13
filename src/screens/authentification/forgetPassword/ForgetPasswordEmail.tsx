@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React from 'react';
 import {
   Image,
   ScrollView,
@@ -8,7 +9,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {primary} from 'constants/Colors.ts';
+import {
+  gray,
+  inputbackgroundColor,
+  primary,
+  secondary,
+} from 'constants/Colors.ts';
 import * as yup from 'yup';
 import {Formik} from 'formik';
 
@@ -26,15 +32,7 @@ const ForgetPasswordEmail = ({navigation}: {navigation: any}) => {
       validateOnMount={true}
       validationSchema={ForgetPasswordEmailForm}
       onSubmit={values => console.log(values)}>
-      {({
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        values,
-        touched,
-        errors,
-        isValid,
-      }) => (
+      {({handleChange, handleBlur, values, touched, errors, isValid}) => (
         <View style={styles.container}>
           <ScrollView contentContainerStyle={styles.scrollview}>
             <View style={styles.header}>
@@ -46,7 +44,8 @@ const ForgetPasswordEmail = ({navigation}: {navigation: any}) => {
             <View style={styles.body}>
               <View style={styles.textcontainer}>
                 <Text style={styles.textStyle}>
-                  Please Enter Your Email Address To Recieve a Verification Cord
+                  Please Enter Your Email Address To Recieve a Verification Code
+                  .
                 </Text>
               </View>
               <View style={styles.conatinerInput}>
@@ -58,8 +57,8 @@ const ForgetPasswordEmail = ({navigation}: {navigation: any}) => {
                     {
                       backgroundColor:
                         (errors.email && !touched.email) || isValid
-                          ? '#fff1ef'
-                          : 'red',
+                          ? inputbackgroundColor
+                          : secondary,
                     },
                   ]}
                   placeholder="Email"
@@ -86,7 +85,9 @@ const ForgetPasswordEmail = ({navigation}: {navigation: any}) => {
                       name: 'ForgetPasswordCodeVirification',
                     })
                   }>
-                  <Text style={{color: 'white'}}>Send</Text>
+                  <Text style={{fontSize: 16, fontWeight: 500, color: 'white'}}>
+                    Send
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -166,7 +167,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    color: primary,
+    color: gray,
   },
   button: {
     alignItems: 'center',
@@ -174,9 +175,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: primary,
     borderRadius: 40,
-    padding: 10,
+    padding: 12,
     margin: 6,
-    width: '80%',
+    width: '60%',
     shadowColor: primary,
     shadowOffset: {
       width: 0,

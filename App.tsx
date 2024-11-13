@@ -4,18 +4,20 @@
  *
  * @format
  */
-
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import Signin from 'screens/authentification/signin/Signin.tsx';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Signup from 'screens/authentification/signup/Signup.tsx';
-import ForgetPasswordEmail from 'screens/authentification/forgetPassword/ForgetPasswordEmail.tsx';
-import ForgetPasswordCodeVirification from 'screens/authentification/forgetPassword/ForgetPasswordCodeVirification.tsx';
-import ForgetPasswordRestPassword from 'screens/authentification/forgetPassword/ForgetPasswordRestPassword.tsx';
 import {primary} from 'constants/Colors.ts';
-import BottomBar from 'components/bottomBar/BottomBar.tsx';
+import {BottomBar} from 'components/export.ts';
+import {
+  LandingScreen,
+  Signin,
+  Signup,
+  ForgetPasswordEmail,
+  ForgetPasswordCodeVirification,
+  ForgetPasswordRestPassword,
+} from 'screens/export.ts';
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -23,6 +25,11 @@ function App() {
     <View style={styles.AppView}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen
+            name="Landing"
+            component={LandingScreen}
+            options={{title: 'ARFY', headerShown: false}}
+          />
           <Stack.Screen
             name="Signup"
             component={Signup}
@@ -71,7 +78,7 @@ function App() {
               },
             }}
           />
-            <Stack.Screen
+          <Stack.Screen
             name="BottomBar"
             component={BottomBar}
             options={{title: 'BottomBar', headerShown: false}}

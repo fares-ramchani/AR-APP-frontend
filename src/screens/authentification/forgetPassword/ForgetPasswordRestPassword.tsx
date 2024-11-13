@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React from 'react';
 import {
   Image,
   ScrollView,
@@ -8,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {primary} from 'constants/Colors.ts';
+import {gray, inputbackgroundColor, primary, secondary} from 'constants/Colors.ts';
 import * as yup from 'yup';
 import {Formik} from 'formik';
 const ForgetPasswordResetPasswordForm = yup.object().shape({
@@ -26,7 +27,6 @@ const ForgetPasswordRestPassword = ({navigation}: {navigation: any}) => {
       {({
         handleChange,
         handleBlur,
-        handleSubmit,
         values,
         touched,
         errors,
@@ -43,8 +43,7 @@ const ForgetPasswordRestPassword = ({navigation}: {navigation: any}) => {
             <View style={styles.body}>
               <View style={styles.textcontainer}>
                 <Text style={styles.textStyle}>
-                  Your New Password Must Be Differnt From Previously Used
-                  Password
+                  Type Your New Password .
                 </Text>
               </View>
               <View style={styles.conatinerInput}>
@@ -57,11 +56,11 @@ const ForgetPasswordRestPassword = ({navigation}: {navigation: any}) => {
                       backgroundColor:
                         (errors.Password && !touched.Password) ||
                         (!isValid && !errors.Password)
-                          ? '#fff1ef'
-                          : 'red',
+                          ? inputbackgroundColor
+                          : secondary,
                     },
                   ]}
-                  placeholder="Password"
+                  placeholder="New Password"
                   keyboardType="default"
                   secureTextEntry={true}
                   onChangeText={handleChange('Password')}
@@ -80,8 +79,8 @@ const ForgetPasswordRestPassword = ({navigation}: {navigation: any}) => {
                       backgroundColor:
                         (errors.ConfirmPassword && !touched.ConfirmPassword) ||
                         (!isValid && !errors.ConfirmPassword)
-                          ? '#fff1ef'
-                          : 'red',
+                        ? inputbackgroundColor
+                        : secondary,
                     },
                   ]}
                   placeholder="Confirm Password"
@@ -187,7 +186,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    color: primary,
+    color: gray,
   },
   button: {
     alignItems: 'center',
