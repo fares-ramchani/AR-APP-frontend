@@ -95,7 +95,25 @@ export default function AnimTab1() {
     <SafeAreaView style={{flex: 1}}>
       <Tab.Navigator
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => {
+                /* Action à réaliser quand l'icône est pressée */
+              }}>
+             
+           
+              
+              <Icon
+                color="black"
+               name="shoppingcart"
+               type={Icons.AntDesign}
+                size={30}
+                
+                style={{marginRight: 24}}
+              />
+            </TouchableOpacity>
+          ),
           tabBarStyle: {
             height: 60,
             position: 'absolute',
