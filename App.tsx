@@ -19,12 +19,16 @@ import {
   ForgetPasswordRestPassword,
 } from 'screens/export.ts';
 const Stack = createNativeStackNavigator();
-
 function App() {
   return (
     <View style={styles.AppView}>
       <NavigationContainer>
         <Stack.Navigator>
+        <Stack.Screen
+            name="BottomBar"
+            component={BottomBar}
+            options={{title: 'BottomBar', headerShown: false}}
+          />
           <Stack.Screen
             name="Landing"
             component={LandingScreen}
