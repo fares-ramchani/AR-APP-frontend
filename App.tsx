@@ -24,11 +24,6 @@ function App() {
     <View style={styles.AppView}>
       <NavigationContainer>
         <Stack.Navigator>
-        <Stack.Screen
-            name="BottomBar"
-            component={BottomBar}
-            options={{title: 'BottomBar', headerShown: false}}
-          />
           <Stack.Screen
             name="Landing"
             component={LandingScreen}
