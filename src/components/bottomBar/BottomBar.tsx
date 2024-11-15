@@ -4,12 +4,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {useEffect, useRef} from 'react';
 import {StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native';
 import FavoritesScreen from 'screens/favoritesScreen/FavoritesScreen.tsx';
-import HomeScreen from 'screens/homescreen/HomeScreen.tsx';
-import ProductsScreen from 'screens/productsScreen/ProductsScreen.tsx';
 import * as Animatable from 'react-native-animatable';
-import Icon, {Icons} from 'constants/Icons.tsx';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {primary} from 'constants/Colors.ts';
+import {CategoriesScreen, HomeScreen} from 'screens/export.ts';
+import {Icon, Icons} from '../export.ts';
 
 const TabArr = [
   {
@@ -26,7 +25,7 @@ const TabArr = [
     type: Icons.MaterialCommunityIcons,
     activeIcon: 'shopping',
     inActiveIcon: 'shopping-outline',
-    component: ProductsScreen,
+    component: CategoriesScreen,
   },
   {
     route: 'Favorites',

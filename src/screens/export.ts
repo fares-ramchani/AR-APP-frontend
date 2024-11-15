@@ -5,3 +5,6 @@ export { default as ForgetPasswordEmail } from './authentification/forgetPasswor
 export { default as ForgetPasswordCodeVirification } from './authentification/forgetPassword/ForgetPasswordCodeVirification.tsx';
 export { default as ForgetPasswordRestPassword } from './authentification/forgetPassword/ForgetPasswordRestPassword.tsx';
 export { default as ProductDetails } from './productsScreen/ProductDetails.tsx';
+export { default as HomeScreen } from './homescreen/HomeScreen.tsx';
+export { default as CategoriesScreen } from './categoriesScreen/CategoriesScreen.tsx';
+
