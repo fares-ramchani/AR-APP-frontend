@@ -17,12 +17,12 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import { primary } from 'constants/Colors.ts';
-import Icon, { Icons } from 'constants/Icons.tsx';
+import {primary} from 'constants/Colors.ts';
+import {Icon, Icons} from '../export.ts';
 
 const SRC_WIDTH = Dimensions.get('window').width;
 const CARD_LENGTH = SRC_WIDTH * 0.62;
-const SPACING = SRC_WIDTH * 0.05;
+const SPACING = SRC_WIDTH * 0.02;
 const SIDECARD_LENGTH = (SRC_WIDTH * 0.1) / 5;
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -32,7 +32,7 @@ interface itemProps {
 }
 
 function Item({index, scrollX}: itemProps) {
-  const size = useSharedValue(0.8);
+  const size = useSharedValue(2);
 
   const inputRange = [
     (index - 1) * CARD_LENGTH,
@@ -78,27 +78,61 @@ function Item({index, scrollX}: itemProps) {
         },
       ]}>
       <View
-        
-        style={{flex:1, width: '100%', height: '100%',backgroundColor:'white',padding:20 }}
-      >
-        <TouchableOpacity style={{width:40,height:40,backgroundColor:'white',position:'absolute',zIndex:10,right:25,top:25,borderRadius:50,opacity:0.7,justifyContent:'center',alignItems:'center'}}>
-        <Icon color="black" name="heart-outline" type={Icons.Ionicons} size={25} />
+        style={{
+          flex: 1,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'white',
+          padding: 20,
+        }}>
+        <TouchableOpacity
+          style={{
+            width: 40,
+            height: 40,
+            backgroundColor: 'white',
+            position: 'absolute',
+            zIndex: 10,
+            right: 25,
+            top: 25,
+            borderRadius: 50,
+            opacity: 0.7,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Icon
+            color="black"
+            name="heart-outline"
+            type={Icons.Ionicons}
+            size={25}
+          />
         </TouchableOpacity>
-        
+
         <Image
-        style={{resizeMode:'cover', width: '100%', height: '70%',borderRadius:10 }}
-        source={require('asssets/img/wall.png')} 
+          style={{
+            resizeMode: 'cover',
+            width: '100%',
+            height: '70%',
+            borderRadius: 10,
+          }}
+          source={require('asssets/img/wall.png')}
         />
 
-       
-        <Text style={{color:'grey',fontSize:20,fontWeight:'bold',marginTop:12}}>Sverom chair</Text>
-        <Text  style={{color:'black',fontSize:20}}>65,000 TND</Text>
+        <Text
+          style={{
+            color: 'grey',
+            fontSize: 20,
+            fontWeight: 'bold',
+            marginTop: 12,
+          }}>
+          Sverom chair
+        </Text>
+        <Text style={{color: 'black', fontSize: 20}}>65,000 TND</Text>
       </View>
     </Animated.View>
   );
 }
 
-export default function Carousel() {
+export default function CarouselVertical() {
   const [scrollX, setScrollX] = useState(0);
 
   const DATA = [
@@ -155,7 +189,7 @@ export default function Carousel() {
 
 const styles = StyleSheet.create({
   card: {
-    margin:10,
+    margin: 10,
     width: CARD_LENGTH,
     height: 270,
     overflow: 'hidden',

@@ -1,7 +1,7 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Text, TextInput, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon, {Icons} from 'constants/Icons.tsx';
+import {Icon, Icons} from '../export.ts';
 
 const HeaderHomeScreen = () => {
   return (
@@ -12,18 +12,17 @@ const HeaderHomeScreen = () => {
         <LinearGradient
           colors={['#ded8d1', '#ded8d1']}
           style={styles.linearGradient}>
-            <View style={styles.overlay}>
-          <Text style={styles.title}>Set up your space easily</Text>
-          <View style={styles.searchContainer}>
-            <Icon color="gray" name="search" type={Icons.Ionicons} size={20} />
-            <TextInput
-              placeholder="Search Item"
-              placeholderTextColor="gray"
-              style={styles.input}
-            />
-          </View>
-          </View>
+          <View style={styles.overlay}></View>
         </LinearGradient>
+        <Text style={styles.title}>Set up your space easily</Text>
+        <View style={styles.searchContainer}>
+          <Icon color="gray" name="search" type={Icons.Ionicons} size={20} />
+          <TextInput
+            placeholder="Search Item"
+            placeholderTextColor="gray"
+            style={styles.input}
+          />
+        </View>
       </ImageBackground>
     </View>
   );
@@ -44,18 +43,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   overlay: {
-    height:'100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)', 
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
     padding: 20,
     alignItems: 'center',
-    justifyContent:'center'
-   
+    justifyContent: 'center',
   },
   title: {
     color: 'white',
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    zIndex: 10,
   },
   searchContainer: {
     flexDirection: 'row',
@@ -74,6 +73,6 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     ...StyleSheet.absoluteFillObject,
-    opacity: 0.6 ,
+    opacity: 0.6,
   },
 });
