@@ -10,4 +10,7 @@ export const redAlpha = 'rgba(255, 84, 84, 0.15)';
 export const greenAlpha = 'rgba(96, 197, 168, 0.15)';
 export const gray = '#c8c7c7';
 export const inputbackgroundColor = '#f9f9f9';
+export const grayAlpha = '#f9f9f9';
+export const primaryBackground = '#ffead6';
+
 
