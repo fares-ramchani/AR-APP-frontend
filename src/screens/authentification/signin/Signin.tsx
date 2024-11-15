@@ -26,7 +26,6 @@ const Signin = ({navigation}: {navigation: any}) => {
             'transparent',
             'transparent',
             'transparent',
-            'gray',
           ]}
           style={styles.linear}>
           <LinearGradient
