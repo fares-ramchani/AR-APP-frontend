@@ -95,15 +95,11 @@ export default function AnimTab1() {
               onPress={() => {
                 /* Action à réaliser quand l'icône est pressée */
               }}>
-             
-           
-              
               <Icon
                 color="black"
-               name="shoppingcart"
-               type={Icons.AntDesign}
+                name="shoppingcart"
+                type={Icons.AntDesign}
                 size={30}
-                
                 style={{marginRight: 24}}
               />
             </TouchableOpacity>

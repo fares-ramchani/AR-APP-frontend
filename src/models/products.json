@@ -1,0 +1,62 @@
+[
+    {
+      "id": 1,
+      "name": "Sverom Chair",
+      "price": 65,
+      "description": "A comfortable chair perfect for any living room or workspace. Made with high-quality fabric and ergonomic design.",
+      "coverImage": "https://i.imgur.com/5fZCibR.jpg",
+      "sideImages": [
+        "https://i.imgur.com/nT4w4b1.jpg",
+        "https://i.imgur.com/owEtuw7.jpg",
+        "https://i.imgur.com/s4PfiS2.jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Mini Sit Me",
+      "price": 750,
+      "description": "Compact and stylish chair ideal for modern interiors. Features a sleek design with durable materials.",
+      "coverImage": "https://i.imgur.com/kdKxlwT.jpg",
+      "sideImages": [
+        "https://i.imgur.com/M7Kz1Pd.jpg",
+        "https://i.imgur.com/uXMHdCL.jpg",
+        "https://i.imgur.com/0RUJny6.jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Moderno Sofa",
+      "price": 1500,
+      "description": "A luxurious sofa with ample seating and premium fabric, designed for ultimate relaxation.",
+      "coverImage": "https://i.imgur.com/GIlTZYi.jpg",
+      "sideImages": [
+        "https://i.imgur.com/QUkw0E5.jpg",
+        "https://i.imgur.com/Eb1Flgt.jpg",
+        "https://i.imgur.com/H6rBfX8.jpg"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Classic Wooden Table",
+      "price": 950,
+      "description": "An elegant wooden table crafted from oak, perfect for dining or workspaces.",
+      "coverImage": "https://i.imgur.com/Dy9vspr.jpg",
+      "sideImages": [
+        "https://i.imgur.com/YdrfiFM.jpg",
+        "https://i.imgur.com/UhGc3XC.jpg",
+        "https://i.imgur.com/KkM4Ryj.jpg"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Elegance Bookshelf",
+      "price": 850,
+      "description": "A sleek bookshelf with ample storage for books and decor, designed for modern interiors.",
+      "coverImage": "https://i.imgur.com/M5F3pE6.jpg",
+      "sideImages": [
+        "https://i.imgur.com/GHrDUEf.jpg",
+        "https://i.imgur.com/KFYDqpz.jpg",
+        "https://i.imgur.com/kQQ2lnT.jpg"
+      ]
+    }
+  ]

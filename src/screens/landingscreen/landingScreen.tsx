@@ -33,13 +33,13 @@ const LandingScreen = ({navigation}: {navigation: any}) => {
           />
         </View>
         <View style={styles.logoContainer}>
-          <LinearGradient
+          {/* <LinearGradient
             colors={['transparent', 'white']}
             style={styles.box}
-          />
+          /> */}
           <Image
-            source={require('asssets/img/arfy.png')}
-            style={{width: 170, height: 110}}
+            source={require('asssets/img/arfylogoicon-removebg-preview-2.png')}
+            style={{width: 160, height: 150}}
           />
         </View>
         <View style={styles.textContainer}>
@@ -63,12 +63,13 @@ const styles = StyleSheet.create({
   },
   imagebackground: {
     width: '70%',
-    height: 580,
+    height: 300,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
+    marginTop: 120,
   },
-  box: {width: '60%', height: 40, position: 'absolute', top: 60, left: 77},
+  box: {width: '50%', height: 40, position: 'absolute', top: 90, left: 50},
   logoContainer: {
     flexDirection: 'row',
     width: '50%',
@@ -76,7 +77,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
-    marginRight: 120,
+    marginTop: 0,
+    marginRight: 20,
     borderRadius: 200,
     borderColor: 'white',
     shadowColor: 'gray',
@@ -90,16 +92,16 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   text: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '500',
-    color: 'white',
+    color: 'black',
   },
   textContainer: {
     width: '80%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
-    marginTop: 4,
+    marginTop: 60,
   },
   button: {
     flexDirection: 'row',
