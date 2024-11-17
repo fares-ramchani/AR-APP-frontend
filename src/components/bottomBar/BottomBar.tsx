@@ -8,7 +8,8 @@ import * as Animatable from 'react-native-animatable';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {primary} from 'constants/Colors.ts';
 import {CategoriesScreen, HomeScreen} from 'screens/export.ts';
-import {Icon, Icons} from '../export.ts';
+import {Icons} from '../icons/Icons';
+import Icon from '../icons/Icons';
 
 const TabArr = [
   {

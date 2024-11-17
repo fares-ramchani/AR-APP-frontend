@@ -11,8 +11,9 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Foundation from 'react-native-vector-icons/Foundation';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import {StyleProp, ViewStyle} from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 
+// Ensure all icon libraries are grouped under Icons
 export const Icons = {
   MaterialCommunityIcons,
   MaterialIcons,
@@ -28,24 +29,19 @@ export const Icons = {
   EvilIcons,
 };
 
+// Correct IconProps and Icon Component
 export interface IconProps {
-  type: Function;
+  type: Function; // Could also be typeof React.Component
   name: string;
   color?: string;
   size?: number;
   style?: StyleProp<ViewStyle>;
 }
 
-const Icon = ({type, name, color, size = 24, style}: IconProps) => {
-  const fontSize = 24;
+const Icon = ({ type, name, color, size = 24, style }: IconProps) => {
+  if (!type || !name) return null; // Prevent rendering issues
   const Tag = type;
-  return (
-    <>
-      {type && name && (
-        <Tag name={name} size={size || fontSize} color={color} style={style} />
-      )}
-    </>
-  );
+  return <Tag name={name} size={size} color={color} style={style} />;
 };
 
 export default Icon;
