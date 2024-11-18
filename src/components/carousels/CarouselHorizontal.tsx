@@ -1,4 +1,6 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import data from 'models/db.json';
 import {
   StyleSheet,
   View,
@@ -11,26 +13,7 @@ import {
 import {Icon, Icons} from '../export.ts';
 const SRC_WIDTH = Dimensions.get('window').width;
 const CARD_LENGTH = SRC_WIDTH * 0.42;
-const DATA = [
-  {
-    title: 'First Item',
-  },
-  {
-    title: 'Second Item',
-  },
-  {
-    title: 'Third Item',
-  },
-  {
-    title: 'First Item',
-  },
-  {
-    title: 'Second Item',
-  },
-  {
-    title: 'Third Item',
-  },
-];
+const DATA = data;
 const CarouselHorizontal = () => {
   return (
     <View>
@@ -40,7 +23,7 @@ const CarouselHorizontal = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{gap: 10, paddingBottom: 12}}
         data={DATA}
-        keyExtractor={(item, idx) => item?.title}
+        keyExtractor={(item, idx) => item?.id}
         renderItem={({item}) => (
           <View style={styles.card}>
             <View
@@ -80,7 +63,9 @@ const CarouselHorizontal = () => {
                   height: '70%',
                   borderRadius: 10,
                 }}
-                source={require('asssets/img/wall.png')}
+                source={{
+                  uri: item?.coverImage,
+                }}
               />
 
               <Text
@@ -90,12 +75,12 @@ const CarouselHorizontal = () => {
                   fontWeight: 'bold',
                   marginTop: 12,
                 }}>
-                Sverom chair
+                {item?.productName}
               </Text>
-              <Text style={{color: 'black', fontSize: 14}}>65,000 TND</Text>
+              <Text style={{color: 'black', fontSize: 14}}>{item?.price} TND</Text>
             </View>
           </View>
-        )}></FlatList>
+        )} />
     </View>
   );
 };

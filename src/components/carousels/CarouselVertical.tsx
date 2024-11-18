@@ -2,6 +2,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useState} from 'react';
+import data from 'models/db.json';
 import {
   StyleSheet,
   FlatList,
@@ -29,9 +30,10 @@ const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 interface itemProps {
   index: number;
   scrollX: number;
+  product: any;
 }
 
-function Item({index, scrollX}: itemProps) {
+function Item({index, scrollX, product}: itemProps) {
   const size = useSharedValue(2);
 
   const inputRange = [
@@ -115,7 +117,7 @@ function Item({index, scrollX}: itemProps) {
             borderRadius: 10,
           }}
           source={{
-            uri: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            uri: product?.coverImage,
           }}
         />
 
@@ -126,9 +128,9 @@ function Item({index, scrollX}: itemProps) {
             fontWeight: 'bold',
             marginTop: 12,
           }}>
-          Sverom chair
+          {product?.productName}
         </Text>
-        <Text style={{color: 'black', fontSize: 20}}>65,000 TND</Text>
+        <Text style={{color: 'black', fontSize: 20}}>{product?.price} TND</Text>
       </View>
     </Animated.View>
   );
@@ -137,32 +139,7 @@ function Item({index, scrollX}: itemProps) {
 export default function CarouselVertical() {
   const [scrollX, setScrollX] = useState(0);
 
-  const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-    {
-      id: '56454154',
-      title: 'sdfdsfd',
-    },
-    {
-      id: '00147',
-      title: 'ddfsdfsdfsdf',
-    },
-    {
-      id: '036847989',
-      title: 'smfkmosjfusgfi',
-    },
-  ];
+  const DATA = data;
 
   return (
     <Animated.View>
@@ -177,7 +154,7 @@ export default function CarouselVertical() {
         data={DATA}
         horizontal={true}
         renderItem={({item, index}) => {
-          return <Item index={index} scrollX={scrollX} />;
+          return <Item index={index} scrollX={scrollX} product={item} />;
         }}
         //@ts-ignore
         keyExtractor={item => item.id}
