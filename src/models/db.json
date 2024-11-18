@@ -1,0 +1,154 @@
+[
+    {
+      "id": "1",
+      "productName": "Modern Sofa",
+      "description": "A comfortable and stylish modern sofa perfect for any living room.",
+      "price": 499.99,
+      "colors": ["Gray", "Blue", "Beige"],
+      "coverImage": "https://plus.unsplash.com/premium_photo-1681449856688-2abd99ab5a73?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sideImages": [
+        "https://example.com/images/sofa1_side1.jpg",
+        "https://example.com/images/sofa1_side2.jpg"
+      ],
+      "maxQuantity": 10,
+      "reviews": [
+        { "user": "Alice", "rating": 4, "comment": "Very comfortable!" },
+        { "user": "Bob", "rating": 5, "comment": "Looks great in my living room." }
+      ]
+    },
+    {
+      "id": "2",
+      "productName": "Dining Table Set",
+      "description": "A classic dining table with six chairs included.",
+      "price": 799.99,
+      "colors": ["Brown", "White"],
+      "coverImage": "https://images.unsplash.com/photo-1505409628601-edc9af17fda6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sideImages": [
+        "https://example.com/images/table1_side1.jpg",
+        "https://example.com/images/table1_side2.jpg"
+      ],
+      "maxQuantity": 5,
+      "reviews": [
+        { "user": "Cathy", "rating": 5, "comment": "Solid build and elegant design." }
+      ]
+    },
+    {
+      "id": "3",
+      "productName": "Office Chair",
+      "description": "An ergonomic office chair with adjustable height and lumbar support.",
+      "price": 199.99,
+      "colors": ["Black", "Gray", "Red"],
+      "coverImage": "https://images.unsplash.com/photo-1688578735427-994ecdea3ea4?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sideImages": [
+        "https://example.com/images/chair1_side1.jpg",
+        "https://example.com/images/chair1_side2.jpg"
+      ],
+      "maxQuantity": 20,
+      "reviews": [
+        { "user": "David", "rating": 4, "comment": "Comfortable for long hours." }
+      ]
+    },
+    {
+      "id": "4",
+      "productName": "Queen Bed Frame",
+      "description": "A sturdy wooden queen-sized bed frame.",
+      "price": 599.99,
+      "colors": ["Walnut", "Black"],
+      "coverImage": "https://plus.unsplash.com/premium_photo-1676968003079-1d828604b2aa?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sideImages": [
+        "https://example.com/images/bed1_side1.jpg",
+        "https://example.com/images/bed1_side2.jpg"
+      ],
+      "maxQuantity": 8,
+      "reviews": []
+    },
+    {
+      "id": "5",
+      "productName": "Bookshelf",
+      "description": "A tall bookshelf with five spacious shelves.",
+      "price": 149.99,
+      "colors": ["White", "Oak", "Espresso"],
+      "coverImage": "https://plus.unsplash.com/premium_photo-1661889038120-4e8c7eccbf73?q=80&w=2154&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sideImages": [
+        "https://example.com/images/bookshelf1_side1.jpg"
+      ],
+      "maxQuantity": 15,
+      "reviews": [
+        { "user": "Emma", "rating": 5, "comment": "Easy to assemble and looks great!" }
+      ]
+    },
+    {
+      "id": "6",
+      "productName": "Coffee Table",
+      "description": "A glass-top coffee table with a metal frame.",
+      "price": 129.99,
+      "colors": ["Black", "Silver"],
+      "coverImage": "https://plus.unsplash.com/premium_photo-1664193968861-5d23c7652008?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sideImages": [
+        "https://example.com/images/coffeetable1_side1.jpg",
+        "https://example.com/images/coffeetable1_side2.jpg"
+      ],
+      "maxQuantity": 12,
+      "reviews": []
+    },
+    {
+      "id": "7",
+      "productName": "TV Stand",
+      "description": "A compact TV stand with storage cabinets.",
+      "price": 249.99,
+      "colors": ["Black", "Gray"],
+      "coverImage": "https://plus.unsplash.com/premium_photo-1681816189276-69731364c133?q=80&w=2091&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sideImages": [
+        "https://example.com/images/tvstand1_side1.jpg",
+        "https://example.com/images/tvstand1_side2.jpg"
+      ],
+      "maxQuantity": 10,
+      "reviews": []
+    },
+    {
+      "id": "8",
+      "productName": "Recliner Chair",
+      "description": "A plush recliner chair with adjustable backrest.",
+      "price": 399.99,
+      "colors": ["Brown", "Cream"],
+      "coverImage": "https://plus.unsplash.com/premium_photo-1676823570926-238f23020786?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sideImages": [
+        "https://example.com/images/recliner1_side1.jpg",
+        "https://example.com/images/recliner1_side2.jpg"
+      ],
+      "maxQuantity": 6,
+      "reviews": [
+        { "user": "Frank", "rating": 5, "comment": "Perfect for relaxing!" }
+      ]
+    },
+    {
+      "id": "9",
+      "productName": "Wardrobe",
+      "description": "A spacious wardrobe with sliding doors.",
+      "price": 899.99,
+      "colors": ["White", "Oak"],
+      "coverImage": "https://plus.unsplash.com/premium_photo-1670076515866-73822a3d610d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sideImages": [
+        "https://example.com/images/wardrobe1_side1.jpg"
+      ],
+      "maxQuantity": 4,
+      "reviews": []
+    },
+    {
+      "id": "10",
+      "productName": "Bar Stools",
+      "description": "A set of two adjustable-height bar stools.",
+      "price": 159.99,
+      "colors": ["Black", "Red"],
+      "coverImage": "https://plus.unsplash.com/premium_photo-1675537856878-7b5672654eb9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sideImages": [
+        "https://example.com/images/barstools1_side1.jpg",
+        "https://example.com/images/barstools1_side2.jpg"
+      ],
+      "maxQuantity": 20,
+      "reviews": [
+        { "user": "Gina", "rating": 4, "comment": "Stylish and sturdy." }
+      ]
+    }
+  ]
+  

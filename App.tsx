@@ -18,6 +18,7 @@ import {
   ForgetPasswordCodeVirification,
   ForgetPasswordRestPassword,
   ProductDetails,
+  CartScreen,
 } from 'screens/export.ts';
 const Stack = createNativeStackNavigator();
 function App() {
@@ -87,6 +88,11 @@ function App() {
             name="ProductDetails"
             component={ProductDetails}
             options={{title: 'Details', headerShown: false}}
+          />
+          <Stack.Screen
+            name="Cart"
+            component={CartScreen}
+            options={{title: 'Cart', headerShown: true}}
           />
         </Stack.Navigator>
       </NavigationContainer>

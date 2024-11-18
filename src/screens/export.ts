@@ -7,4 +7,7 @@ export { default as ForgetPasswordRestPassword } from './authentification/forget
 export { default as ProductDetails } from './productsScreen/ProductDetails.tsx';
 export { default as HomeScreen } from './homescreen/HomeScreen.tsx';
 export { default as CategoriesScreen } from './categoriesScreen/CategoriesScreen.tsx';
+export { default as CartScreen } from './cart/CartScreen.tsx';
+export { default as Settings } from './settings/Settings.tsx';
+
 
