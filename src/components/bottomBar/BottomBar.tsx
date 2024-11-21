@@ -93,7 +93,7 @@ export default function AnimTab1({navigation}: {navigation: any}) {
           headerRight: () => (
             <TouchableOpacity
               onPress={() => {
-               navigation.navigate('Cart')
+                navigation.navigate('Cart');
               }}>
               <Icon
                 color="black"

@@ -16,10 +16,10 @@ const CARD_LENGTH = SRC_WIDTH * 0.42;
 const DATA = data;
 const CarouselHorizontal = () => {
   return (
-    <View>
+    <View style={styles.flatListeStyle}>
       <FlatList
         numColumns={2}
-        columnWrapperStyle={{gap: 10, paddingHorizontal: 12}}
+        columnWrapperStyle={{gap: 10, paddingHorizontal: 12, paddingBottom: 12}}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{gap: 10, paddingBottom: 12}}
         data={DATA}
@@ -77,10 +77,13 @@ const CarouselHorizontal = () => {
                 }}>
                 {item?.productName}
               </Text>
-              <Text style={{color: 'black', fontSize: 14}}>{item?.price} TND</Text>
+              <Text style={{color: 'black', fontSize: 14}}>
+                {item?.price} TND
+              </Text>
             </View>
           </View>
-        )} />
+        )}
+      />
     </View>
   );
 };
@@ -100,6 +103,9 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
 
     elevation: 20,
+  },
+  flatListeStyle: {
+    alignItems: 'center',
   },
 });
 
