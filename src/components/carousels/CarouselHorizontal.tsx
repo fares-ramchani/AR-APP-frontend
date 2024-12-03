@@ -13,8 +13,7 @@ import {
 import {Icon, Icons} from '../export.ts';
 const SRC_WIDTH = Dimensions.get('window').width;
 const CARD_LENGTH = SRC_WIDTH * 0.42;
-const DATA = data;
-const CarouselHorizontal = () => {
+const CarouselHorizontal = ({DATA}: {DATA: any}) => {
   return (
     <View style={styles.flatListeStyle}>
       <FlatList

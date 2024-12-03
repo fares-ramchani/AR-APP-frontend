@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -11,7 +11,13 @@ import {
 import Icon, {Icons} from 'components/icons/Icons.tsx';
 import data from 'models/db.json';
 
-const CategoriesScreen = () => {
+const CategoriesScreen = ({navigation}: {navigation: any}) => {
+  const [searchValue, setSearchValue] = useState('');
+
+  const filteredCategories = data.filter(item =>
+    item.categorie.toLowerCase().includes(searchValue.toLowerCase()),
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -19,29 +25,38 @@ const CategoriesScreen = () => {
           <View style={styles.contentSearchContainer}>
             <Icon color="gray" name="search" type={Icons.Ionicons} size={20} />
             <TextInput
-              placeholder="Search Item"
+              placeholder="Search Categories"
               placeholderTextColor="gray"
               style={styles.input}
+              value={searchValue}
+              onChangeText={setSearchValue}
             />
-          </View>
-          <View>
-            <Icon color="gray" name="filter" type={Icons.Feather} size={20} />
           </View>
         </View>
       </View>
       <ScrollView contentContainerStyle={styles.scrollview}>
         <View style={styles.body}>
-          {data.map((item, index) => (
-            <TouchableOpacity key={index}>
-              <Image
-                style={styles.image}
-                source={{
-                  uri: item?.coverImage,
-                }}
-              />
-              <Text style={styles.categoryName}>CategorieName</Text>
-            </TouchableOpacity>
-          ))}
+          {filteredCategories.length > 0 ? (
+            filteredCategories.map((item, index) => (
+              <TouchableOpacity
+                key={item.id}
+                onPress={() =>
+                  navigation.navigate('ProductsScreen', {
+                    categoryName: item.categorie,
+                  })
+                }>
+                <Image
+                  style={styles.image}
+                  source={{
+                    uri: item?.coverImage,
+                  }}
+                />
+                <Text style={styles.categoryName}>{item?.categorie}</Text>
+              </TouchableOpacity>
+            ))
+          ) : (
+            <Text style={styles.noResultsText}>No categories found.</Text>
+          )}
         </View>
       </ScrollView>
     </View>
@@ -77,6 +92,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 15,
     width: '90%',
+    maxHeight: 50,
   },
   contentSearchContainer: {
     flexDirection: 'row',
@@ -85,6 +101,7 @@ const styles = StyleSheet.create({
   input: {
     color: 'black',
     marginLeft: 10,
+    maxWidth: '84%',
   },
   body: {
     width: '100%',
@@ -103,6 +120,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 20,
     bottom: 58,
+  },
+  noResultsText: {
+    fontSize: 18,
+    color: 'gray',
+    textAlign: 'center',
+    marginTop: 20,
   },
 });
 

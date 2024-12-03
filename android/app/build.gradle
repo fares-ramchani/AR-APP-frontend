@@ -132,4 +132,3 @@ dependencies {
     }
      implementation project(':react-native-vector-icons')
 }
-

@@ -14,7 +14,8 @@
       "reviews": [
         { "user": "Alice", "rating": 4, "comment": "Very comfortable!" },
         { "user": "Bob", "rating": 5, "comment": "Looks great in my living room." }
-      ]
+      ],
+      "categorie":"categorieName1"
     },
     {
       "id": "2",
@@ -30,7 +31,8 @@
       "maxQuantity": 5,
       "reviews": [
         { "user": "Cathy", "rating": 5, "comment": "Solid build and elegant design." }
-      ]
+      ],
+      "categorie":"categorieName2"
     },
     {
       "id": "3",
@@ -46,7 +48,8 @@
       "maxQuantity": 20,
       "reviews": [
         { "user": "David", "rating": 4, "comment": "Comfortable for long hours." }
-      ]
+      ],
+      "categorie":"categorieName3"
     },
     {
       "id": "4",
@@ -60,7 +63,8 @@
         "https://example.com/images/bed1_side2.jpg"
       ],
       "maxQuantity": 8,
-      "reviews": []
+      "reviews": [],
+      "categorie":"categorieName4"
     },
     {
       "id": "5",
@@ -75,7 +79,8 @@
       "maxQuantity": 15,
       "reviews": [
         { "user": "Emma", "rating": 5, "comment": "Easy to assemble and looks great!" }
-      ]
+      ],
+      "categorie":"categorieName5"
     },
     {
       "id": "6",
@@ -89,7 +94,8 @@
         "https://example.com/images/coffeetable1_side2.jpg"
       ],
       "maxQuantity": 12,
-      "reviews": []
+      "reviews": [],
+      "categorie":"categorieName6"
     },
     {
       "id": "7",
@@ -103,7 +109,8 @@
         "https://example.com/images/tvstand1_side2.jpg"
       ],
       "maxQuantity": 10,
-      "reviews": []
+      "reviews": [],
+      "categorie":"categorieName7"
     },
     {
       "id": "8",
@@ -119,7 +126,8 @@
       "maxQuantity": 6,
       "reviews": [
         { "user": "Frank", "rating": 5, "comment": "Perfect for relaxing!" }
-      ]
+      ],
+      "categorie":"categorieName8"
     },
     {
       "id": "9",
@@ -132,7 +140,8 @@
         "https://example.com/images/wardrobe1_side1.jpg"
       ],
       "maxQuantity": 4,
-      "reviews": []
+      "reviews": [],
+      "categorie":"categorieName9"
     },
     {
       "id": "10",
@@ -148,7 +157,8 @@
       "maxQuantity": 20,
       "reviews": [
         { "user": "Gina", "rating": 4, "comment": "Stylish and sturdy." }
-      ]
+      ],
+      "categorie":"categorieName10"
     }
   ]
   

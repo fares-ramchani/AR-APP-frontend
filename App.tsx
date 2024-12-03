@@ -19,7 +19,10 @@ import {
   ForgetPasswordRestPassword,
   ProductDetails,
   CartScreen,
+  ProductsScreen,
+  CategoriesScreen,
 } from 'screens/export.ts';
+import DrawerNavigator from 'components/drawerNavigation/DrawerNavigator.tsx';
 const Stack = createNativeStackNavigator();
 function App() {
   return (
@@ -93,6 +96,21 @@ function App() {
             name="Cart"
             component={CartScreen}
             options={{title: 'Cart', headerShown: true}}
+          />
+          <Stack.Screen
+            name="ProductsScreen"
+            component={ProductsScreen}
+            options={{ headerShown: true}}
+          />
+           <Stack.Screen
+            name="CategoriesScreen"
+            component={CategoriesScreen}
+            options={{ title: 'CategoriesScreen',headerShown: true}}
+          />
+            <Stack.Screen
+            name="DrawerNavigator"
+            component={DrawerNavigator}
+            options={{headerShown: true}}
           />
         </Stack.Navigator>
       </NavigationContainer>

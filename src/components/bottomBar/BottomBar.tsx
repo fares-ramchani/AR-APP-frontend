@@ -21,8 +21,8 @@ const TabArr = [
     component: HomeScreen,
   },
   {
-    route: 'Products',
-    label: 'Products',
+    route: 'Categories',
+    label: 'Categories',
     type: Icons.MaterialCommunityIcons,
     activeIcon: 'shopping',
     inActiveIcon: 'shopping-outline',

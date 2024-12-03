@@ -5,6 +5,7 @@ import HeaderHomeScreen from 'components/headerHomeScreen/HeaderHomeScreen.tsx';
 import {primary} from 'constants/Colors.ts';
 import CarouselHorizontal from 'components/carousels/CarouselHorizontal.tsx';
 import {Icon, Icons} from 'components/export.ts';
+import data from 'models/db.json';
 
 const HomeScreen = () => {
   const dummyData = [{id: 1}, {id: 2}];
@@ -70,7 +71,7 @@ const HomeScreen = () => {
           />
         </View>
       </View>
-      <CarouselHorizontal />
+      <CarouselHorizontal DATA={data} />
     </>
   );
 
