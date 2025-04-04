@@ -1,35 +1,60 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
-  Image,
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
+  View,
   Text,
   TextInput,
-  View,
+  ScrollView,
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Alert,
 } from 'react-native';
-import {green, primary} from 'constants/Colors.ts';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
 import {ProgressSteps, ProgressStep} from 'react-native-progress-steps';
 import LinearGradient from 'react-native-linear-gradient';
+import {
+  green,
+  primary,
+  inputbackgroundColor,
+  secondary,
+} from 'constants/Colors.ts';
+import api from '../../../services/axios/api'; // Assure-toi que le chemin est correct
+
+const SignupSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  phone: Yup.string().required('Phone number is required'),
+  address: Yup.string().required('Address is required'),
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  password: Yup.string().min(6).required('Password is required'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password')], 'Passwords do not match')
+    .required('Confirm Password is required'),
+});
 
 const Signup = ({navigation}: {navigation: any}) => {
-  const [state, setState] = useState({
-    isValid: false,
-    errors: false,
-  });
-  const navigationToScreenSignin = () => {
-    navigation.navigate('BottomBar', {name: 'BottomBar'});
-  };
+  const [loading, setLoading] = useState(false);
+  const handleSignup = async (values: any) => {
+    try {
+      setLoading(true);
+      const response = await api.post('/auth/signup', {
+        name: values.name,
+        phone: values.phone,
+        adress: values.address,
+        email: values.email,
+        password: values.password,
+      });
 
-  const onNextStep = () => {
-    console.log('next');
-
-    if (!state.isValid) {
-      setState({isValid: false, errors: false});
-    } else {
-      setState({isValid: false, errors: false});
+      Alert.alert('Success', 'Signed up successfully!');
+      navigation.navigate('Signin'); // remplace 'Home' par ton écran cible
+    } catch (error: any) {
+      Alert.alert('Login failed', error.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
     }
   };
+
+
   return (
     <ScrollView contentContainerStyle={styles.scrollview}>
       <ImageBackground
@@ -56,93 +81,169 @@ const Signup = ({navigation}: {navigation: any}) => {
                 />
               </View>
             </View>
-            <View style={styles.body}>
-              <Text style={styles.title}>Signup</Text>
-              <ProgressSteps
-                activeStepIconBorderColor={primary}
-                completedProgressBarColor={green}
-                completedStepIconColor={green}
-                completedLabelColor={green}
-                activeLabelColor={primary}>
-                <ProgressStep
-                  label="First Step"
-                  onNext={onNextStep}
-                  errors={state.errors}
-                  nextBtnStyle={styles.buttonNext}
-                  nextBtnTextStyle={styles.nextButtonText}>
-                  <View style={styles.containerProgressStep}>
-                    <View style={styles.inputContainer}>
-                      <Text style={styles.subtitle}>Name</Text>
-                      <TextInput
-                        placeholderTextColor="gray"
-                        style={styles.input}
-                        placeholder="Full name"
-                        keyboardType="email-address"
-                      />
-                    </View>
-                    <View style={styles.inputContainer}>
-                      <Text style={styles.subtitle}>Phone</Text>
-                      <TextInput
-                        placeholderTextColor="gray"
-                        style={styles.input}
-                        placeholder="Phone number"
-                        keyboardType="phone-pad"
-                        secureTextEntry={true}
-                      />
-                    </View>
-                    <View style={styles.inputContainer}>
-                      <Text style={styles.subtitle}>Adress</Text>
-                      <TextInput
-                        placeholderTextColor="gray"
-                        style={styles.input}
-                        placeholder="Adress"
-                        keyboardType="default"
-                      />
-                    </View>
-                  </View>
-                </ProgressStep>
-                <ProgressStep
-                  label="Second Step"
-                  nextBtnStyle={styles.buttonSubmit}
-                  nextBtnTextStyle={styles.nextButtonText}
-                  previousBtnStyle={styles.buttonPrevious}
-                  previousBtnTextStyle={styles.PreviousButtonText}
-                  finishBtnText={'Signup'}
-                  onSubmit={navigationToScreenSignin}>
-                  <View style={styles.containerProgressStep}>
-                    <View style={styles.inputContainer}>
-                      <Text style={styles.subtitle}>Email adress</Text>
-                      <TextInput
-                        placeholderTextColor="gray"
-                        style={styles.input}
-                        placeholder="Email"
-                        keyboardType="email-address"
-                      />
-                    </View>
-                    <View style={styles.inputContainer}>
-                      <Text style={styles.subtitle}>Password</Text>
-                      <TextInput
-                        placeholderTextColor="gray"
-                        style={styles.input}
-                        placeholder="Password"
-                        keyboardType="default"
-                        secureTextEntry={true}
-                      />
-                    </View>
-                    <View style={styles.inputContainer}>
-                      <Text style={styles.subtitle}>Confirm Password</Text>
-                      <TextInput
-                        placeholderTextColor="gray"
-                        style={styles.input}
-                        placeholder="Confirm Password"
-                        keyboardType="default"
-                        secureTextEntry={true}
-                      />
-                    </View>
-                  </View>
-                </ProgressStep>
-              </ProgressSteps>
-            </View>
+
+            <Formik
+              initialValues={{
+                name: '',
+                phone: '',
+                address: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+              }}
+              validationSchema={SignupSchema}
+              onSubmit={values => {
+                console.log('Submitting', values);
+                handleSignup(values);
+              }}>
+              {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                values,
+                errors,
+                touched,
+              }) => (
+                <View style={styles.body}>
+                  <Text style={styles.title}>Signup</Text>
+                  <ProgressSteps
+                    activeStepIconBorderColor={primary}
+                    completedProgressBarColor={green}
+                    completedStepIconColor={green}
+                    completedLabelColor={green}
+                    activeLabelColor={primary}>
+                    <ProgressStep
+                      label="First Step"
+                      nextBtnStyle={styles.buttonNext}
+                      nextBtnTextStyle={styles.nextButtonText}
+                      errors={
+                        !!errors.name || !!errors.phone || !!errors.address
+                      }>
+                      <View style={styles.containerProgressStep}>
+                        <View style={styles.inputContainer}>
+                          <Text style={styles.subtitle}>Name</Text>
+                          {errors.name && touched.name && (
+                            <Text style={styles.errorText}>{errors.name}</Text>
+                          )}
+                          <TextInput
+                            style={[
+                              styles.input,
+                              {
+                                borderWidth:
+                                  errors.name && touched.name ? 1 : 0,
+                                borderColor:
+                                  errors.name && touched.name
+                                    ? secondary
+                                    : inputbackgroundColor,
+                              },
+                            ]}
+                            placeholder="Full name"
+                            placeholderTextColor="gray"
+                            onChangeText={handleChange('name')}
+                            onBlur={handleBlur('name')}
+                            value={values.name}
+                          />
+                        
+                        </View>
+                        <View style={styles.inputContainer}>
+                          <Text style={styles.subtitle}>Phone</Text>
+                          <TextInput
+                            style={styles.input}
+                            placeholder="Phone number"
+                            placeholderTextColor="gray"
+                            keyboardType="phone-pad"
+                            onChangeText={handleChange('phone')}
+                            onBlur={handleBlur('phone')}
+                            value={values.phone}
+                          />
+                          {errors.phone && touched.phone && (
+                            <Text style={styles.errorText}>{errors.phone}</Text>
+                          )}
+                        </View>
+                        <View style={styles.inputContainer}>
+                          <Text style={styles.subtitle}>Address</Text>
+                          <TextInput
+                            style={styles.input}
+                            placeholder="Address"
+                            placeholderTextColor="gray"
+                            onChangeText={handleChange('address')}
+                            onBlur={handleBlur('address')}
+                            value={values.address}
+                          />
+                          {errors.address && touched.address && (
+                            <Text style={styles.errorText}>
+                              {errors.address}
+                            </Text>
+                          )}
+                        </View>
+                      </View>
+                    </ProgressStep>
+
+                    <ProgressStep
+                      label="Second Step"
+                      onSubmit={handleSubmit}
+                      nextBtnStyle={styles.buttonSubmit}
+                      nextBtnTextStyle={styles.nextButtonText}
+                      previousBtnStyle={styles.buttonPrevious}
+                      previousBtnTextStyle={styles.PreviousButtonText}
+                      finishBtnText={'Signup'}>
+                      <View style={styles.containerProgressStep}>
+                        <View style={styles.inputContainer}>
+                          <Text style={styles.subtitle}>Email</Text>
+                          <TextInput
+                            style={styles.input}
+                            placeholder="Email"
+                            placeholderTextColor="gray"
+                            keyboardType="email-address"
+                            onChangeText={handleChange('email')}
+                            onBlur={handleBlur('email')}
+                            value={values.email}
+                          />
+                          {errors.email && touched.email && (
+                            <Text style={styles.errorText}>{errors.email}</Text>
+                          )}
+                        </View>
+                        <View style={styles.inputContainer}>
+                          <Text style={styles.subtitle}>Password</Text>
+                          <TextInput
+                            style={styles.input}
+                            placeholder="Password"
+                            placeholderTextColor="gray"
+                            secureTextEntry
+                            onChangeText={handleChange('password')}
+                            onBlur={handleBlur('password')}
+                            value={values.password}
+                          />
+                          {errors.password && touched.password && (
+                            <Text style={styles.errorText}>
+                              {errors.password}
+                            </Text>
+                          )}
+                        </View>
+                        <View style={styles.inputContainer}>
+                          <Text style={styles.subtitle}>Confirm Password</Text>
+                          <TextInput
+                            style={styles.input}
+                            placeholder="Confirm Password"
+                            placeholderTextColor="gray"
+                            secureTextEntry
+                            onChangeText={handleChange('confirmPassword')}
+                            onBlur={handleBlur('confirmPassword')}
+                            value={values.confirmPassword}
+                          />
+                          {errors.confirmPassword &&
+                            touched.confirmPassword && (
+                              <Text style={styles.errorText}>
+                                {errors.confirmPassword}
+                              </Text>
+                            )}
+                        </View>
+                      </View>
+                    </ProgressStep>
+                  </ProgressSteps>
+                </View>
+              )}
+            </Formik>
           </LinearGradient>
         </LinearGradient>
       </ImageBackground>
@@ -322,6 +423,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: 'white',
     backgroundColor: '#f9f9f9',
+  },
+  errorText: {
+    color: 'red',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    position: 'absolute',
+    right: 15,
   },
 });
 export default Signup;

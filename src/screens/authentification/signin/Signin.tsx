@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {
+  Alert,
   Image,
   ImageBackground,
   ScrollView,
@@ -10,10 +11,47 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {blue, primary} from 'constants/Colors.ts';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../../../services/axios/api'; // <-- Assure-toi que le chemin est correct
+import {blue, primary} from 'constants/Colors.ts';
+import { jwtDecode } from 'jwt-decode';
+
 const Signin = ({navigation}: {navigation: any}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please enter both email and password');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await api.post('/auth/login', {
+        email,
+        password,
+      });
+
+      const token = response.data.data; 
+      const decoded = jwtDecode(token);
+  
+      await AsyncStorage.setItem('token', token);
+      await AsyncStorage.setItem('user', JSON.stringify(decoded));
+   
+
+      Alert.alert('Success', 'Logged in successfully!');
+      navigation.navigate('BottomBar'); // remplace 'Home' par ton écran cible
+    } catch (error: any) {
+      Alert.alert('Login failed', error.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.scrollview}>
       <ImageBackground
@@ -49,8 +87,10 @@ const Signin = ({navigation}: {navigation: any}) => {
                 <TextInput
                   placeholderTextColor="gray"
                   style={styles.input}
-                  placeholder="Email adress"
+                  placeholder="Email address"
                   keyboardType="email-address"
+                  value={email}
+                  onChangeText={setEmail}
                 />
               </View>
               <View style={styles.inputContainer}>
@@ -61,6 +101,8 @@ const Signin = ({navigation}: {navigation: any}) => {
                   placeholder="Password"
                   keyboardType="default"
                   secureTextEntry={true}
+                  value={password}
+                  onChangeText={setPassword}
                 />
               </View>
               <View style={[styles.inputContainer, {alignItems: 'flex-end'}]}>
@@ -75,8 +117,13 @@ const Signin = ({navigation}: {navigation: any}) => {
                 </Text>
               </View>
               <View style={styles.buttons}>
-                <TouchableOpacity style={styles.button}>
-                  <Text style={{color: 'white'}}>Signin</Text>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleLogin}
+                  disabled={loading}>
+                  <Text style={{color: 'white'}}>
+                    {loading ? 'Signing in...' : 'Signin'}
+                  </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[
@@ -138,13 +185,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     marginTop: 20,
   },
-  logo: {
-    width: '20%',
-    height: 40,
-    position: 'relative',
-  },
   login: {
-    // backgroundColor: primary,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
@@ -158,13 +199,9 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     width: '100%',
     shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-
     elevation: 4,
   },
   header: {
@@ -213,10 +250,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#c8c7c7',
   },
-  imageBackground: {
-    flex: 1,
-    padding: 20,
-  },
   buttons: {
     flexDirection: 'row',
     width: '100%',
@@ -233,13 +266,9 @@ const styles = StyleSheet.create({
     margin: 6,
     width: '40%',
     shadowColor: primary,
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-
     elevation: 10,
   },
   inputContainer: {
@@ -258,4 +287,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
   },
 });
+
 export default Signin;

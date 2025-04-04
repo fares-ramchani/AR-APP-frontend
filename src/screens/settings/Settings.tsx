@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
-    Image,
+  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -12,18 +12,29 @@ import {blue, grayAlpha} from 'constants/Colors.ts';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Settings = () => {
+const Settings = async ({navigation}: {navigation: any}) => {
+  const user = await AsyncStorage.getItem('user');
+  let parsedUser: { name: string ,email: string} | null = null;
+  if (user) {
+    parsedUser = JSON.parse(user);
+  }
+  const logout = async () => {
+    await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('user');
+    navigation.navigate('Signin');
+  };
   return (
     <ScrollView style={styles.scrollview}>
       <View style={styles.container}>
         <View style={styles.profileInfos}>
-         <Image />
-          <View>
-            <Text style={styles.title}>Username</Text>
-            <Text style={styles.title}>Email@gmail.Com</Text>
+          <Image />
+          <View >
+            <Text style={styles.title}>{parsedUser?.name || 'username'}</Text>
+            <Text style={styles.title}>{parsedUser?.email || 'Email@gmail.Com'}</Text>
+            </View>
           </View>
-        </View>
         <View style={styles.settings}>
           <View style={styles.settingsSection}>
             <TouchableOpacity style={styles.settingsItem}>
@@ -146,7 +157,7 @@ const Settings = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity style={styles.logoutButton}>
+        <TouchableOpacity style={styles.logoutButton} onPress={logout}>
           <MaterialCommunityIcons
             name="logout"
             size={30}
