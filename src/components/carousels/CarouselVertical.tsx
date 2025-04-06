@@ -82,18 +82,18 @@ function Item({index, scrollX, product}: itemProps) {
         <Image
           style={styles.image}
           source={{
-            uri: product?.coverImage,
+            uri: product?.images[0].url,
           }}
         />
 
-        <Text style={styles.productName}>{product?.productName}</Text>
-        <Text style={styles.productPrice}>{product?.price} TND</Text>
+        <Text style={styles.productName}>{product?.title}</Text>
+        <Text style={styles.productPrice}>{product?.prix} TND</Text>
       </View>
     </Animated.View>
   );
 }
 
-export default function CarouselVertical() {
+export default function CarouselVertical({DATA}: {DATA: any}) {
   const scrollX = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: event => {
@@ -102,7 +102,6 @@ export default function CarouselVertical() {
     },
   });
 
-  const DATA = data;
 
   return (
     <Animated.View>
@@ -164,7 +163,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    resizeMode: 'cover',
+    resizeMode: 'stretch',
     width: '100%',
     height: '70%',
     borderRadius: 10,

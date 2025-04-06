@@ -57,13 +57,13 @@ const CarouselHorizontal = ({DATA}: {DATA: any}) => {
 
               <Image
                 style={{
-                  resizeMode: 'cover',
+                  resizeMode: 'stretch',
                   width: '100%',
                   height: '70%',
                   borderRadius: 10,
                 }}
                 source={{
-                  uri: item?.coverImage,
+                  uri: item?.images[0].url,
                 }}
               />
 
@@ -74,10 +74,10 @@ const CarouselHorizontal = ({DATA}: {DATA: any}) => {
                   fontWeight: 'bold',
                   marginTop: 12,
                 }}>
-                {item?.productName}
+                {item?.title}
               </Text>
               <Text style={{color: 'black', fontSize: 14}}>
-                {item?.price} TND
+                {item?.prix} TND
               </Text>
             </View>
           </View>
