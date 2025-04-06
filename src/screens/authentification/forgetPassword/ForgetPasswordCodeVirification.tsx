@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -12,6 +13,8 @@ import {
 import {inputbackgroundColor, primary, secondary} from 'constants/Colors.ts';
 import * as yup from 'yup';
 import {Formik} from 'formik';
+import api from '../../../services/axios/api'; // <-- Assure-toi que le chemin est correct
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ForgetPasswordCodeVerificationSchema = yup.object().shape({
   Firstcode: yup
@@ -37,6 +40,10 @@ type FormValues = {
   Secondcode: string;
   Thirdcode: string;
   Fourthcode: string;
+};
+type VerifyCode = {
+  email: string;
+  verificationCode: string;
 };
 
 type NumberInputBoxProps = {
@@ -88,6 +95,43 @@ const ForgetPasswordCodeVerification = ({navigation}: {navigation: any}) => {
       setFieldValue(Object.keys(values)[index - 1] as keyof FormValues, '');
     }
   };
+  const [loading, setLoading] = useState(false);
+  const [verifyCode, setVerifyCode] = useState<VerifyCode>({
+    email: '',
+    verificationCode: '',
+  });
+
+  const handleVerificationCode = async (values: any) => {
+    try {
+      setLoading(true);
+      verifyCode.email =
+        (await AsyncStorage.getItem('emailResetPassWord')) || '';
+
+      verifyCode.verificationCode = values.Firstcode.concat(
+        values.Secondcode,
+        values.Thirdcode,
+        values.Fourthcode,
+      );
+      const response = await api.post('/auth/verify-code', {
+        email: verifyCode.email,
+        verificationCode: verifyCode.verificationCode,
+      });
+      await AsyncStorage.removeItem('emailResetPassWord');
+      await AsyncStorage.setItem(
+        'resetPassword',
+        JSON.stringify(response.data?.data),
+      );
+
+      navigation.navigate('ForgetPasswordRestPassword'); // remplace 'Home' par ton écran cible
+    } catch (error: any) {
+      Alert.alert(
+        'verification failed',
+        error.message || 'Something went wrong',
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Formik
       initialValues={{
@@ -98,8 +142,7 @@ const ForgetPasswordCodeVerification = ({navigation}: {navigation: any}) => {
       }}
       validationSchema={ForgetPasswordCodeVerificationSchema}
       onSubmit={values => {
-        console.log(values);
-        navigation.navigate('ForgetPasswordRestPassword');
+        handleVerificationCode(values);
       }}>
       {({
         handleChange,
@@ -164,7 +207,7 @@ const ForgetPasswordCodeVerification = ({navigation}: {navigation: any}) => {
                   disabled={!isValid}
                   onPress={() => handleSubmit()}>
                   <Text style={{fontSize: 16, fontWeight: 500, color: 'white'}}>
-                    Verify
+                    {loading ? 'Verify...' : 'Verify'}
                   </Text>
                 </TouchableOpacity>
               </View>

@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -17,6 +18,8 @@ import {
 } from 'constants/Colors.ts';
 import * as yup from 'yup';
 import {Formik} from 'formik';
+import api from '../../../services/axios/api'; // <-- Assure-toi que le chemin est correct
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ForgetPasswordEmailForm = yup.object().shape({
   email: yup
@@ -26,12 +29,29 @@ const ForgetPasswordEmailForm = yup.object().shape({
 });
 
 const ForgetPasswordEmail = ({navigation}: {navigation: any}) => {
+  const [loading, setLoading] = useState(false);
+  const handleSendEmail = async (values: any) => {
+    try {
+      setLoading(true);
+      const response = await api.post('/auth/code', {
+        email: values.email,
+      });
+      await AsyncStorage.setItem('emailResetPassWord', response.data.data);
+
+      Alert.alert('Success', 'code sent to your email! ' + values.email);
+      navigation.navigate('ForgetPasswordCodeVirification'); // remplace 'Home' par ton écran cible
+    } catch (error: any) {
+      Alert.alert('Send email failed', error.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Formik
       initialValues={{email: ''}}
       validateOnMount={true}
       validationSchema={ForgetPasswordEmailForm}
-      onSubmit={values => console.log(values)}>
+      onSubmit={values => handleSendEmail(values)}>
       {({handleChange, handleBlur, values, touched, errors, isValid}) => (
         <View style={styles.container}>
           <ScrollView contentContainerStyle={styles.scrollview}>
@@ -80,13 +100,9 @@ const ForgetPasswordEmail = ({navigation}: {navigation: any}) => {
                 <TouchableOpacity
                   style={[styles.button, {opacity: isValid ? 1 : 0.7}]}
                   disabled={!isValid}
-                  onPress={() =>
-                    navigation.navigate('ForgetPasswordCodeVirification', {
-                      name: 'ForgetPasswordCodeVirification',
-                    })
-                  }>
+                  onPress={() => handleSendEmail(values)}>
                   <Text style={{fontSize: 16, fontWeight: 500, color: 'white'}}>
-                    Send
+                    {loading ? 'Send...' : 'Send'}
                   </Text>
                 </TouchableOpacity>
               </View>

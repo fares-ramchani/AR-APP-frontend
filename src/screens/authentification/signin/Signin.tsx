@@ -158,7 +158,6 @@ const Signin = ({navigation}: {navigation: any}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 50,
     paddingHorizontal: 15,
   },
   scrollview: {
@@ -195,7 +194,6 @@ const styles = StyleSheet.create({
     borderTopColor: primary,
     borderTopWidth: 6,
     borderRadius: 10,
-    padding: 10,
     marginBottom: 0,
     width: '100%',
     shadowColor: 'black',
@@ -203,6 +201,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
     elevation: 4,
+    height: '99%',
   },
   header: {
     width: '100%',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -54,7 +54,6 @@ const Signup = ({navigation}: {navigation: any}) => {
     }
   };
 
-
   return (
     <ScrollView contentContainerStyle={styles.scrollview}>
       <ImageBackground
@@ -62,12 +61,12 @@ const Signup = ({navigation}: {navigation: any}) => {
         style={styles.container}>
         <LinearGradient
           colors={[
-            '#ffeedf',
             'transparent',
             'transparent',
             'transparent',
             'transparent',
-            'gray',
+            'transparent',
+            'transparent',
           ]}
           style={styles.linear}>
           <LinearGradient
@@ -93,7 +92,6 @@ const Signup = ({navigation}: {navigation: any}) => {
               }}
               validationSchema={SignupSchema}
               onSubmit={values => {
-                console.log('Submitting', values);
                 handleSignup(values);
               }}>
               {({
@@ -143,12 +141,21 @@ const Signup = ({navigation}: {navigation: any}) => {
                             onBlur={handleBlur('name')}
                             value={values.name}
                           />
-                        
                         </View>
                         <View style={styles.inputContainer}>
                           <Text style={styles.subtitle}>Phone</Text>
                           <TextInput
-                            style={styles.input}
+                            style={[
+                              styles.input,
+                              {
+                                borderWidth:
+                                  errors.phone && touched.phone ? 1 : 0,
+                                borderColor:
+                                  errors.phone && touched.phone
+                                    ? secondary
+                                    : inputbackgroundColor,
+                              },
+                            ]}
                             placeholder="Phone number"
                             placeholderTextColor="gray"
                             keyboardType="phone-pad"
@@ -163,7 +170,17 @@ const Signup = ({navigation}: {navigation: any}) => {
                         <View style={styles.inputContainer}>
                           <Text style={styles.subtitle}>Address</Text>
                           <TextInput
-                            style={styles.input}
+                            style={[
+                              styles.input,
+                              {
+                                borderWidth:
+                                  errors.address && touched.address ? 1 : 0,
+                                borderColor:
+                                  errors.address && touched.address
+                                    ? secondary
+                                    : inputbackgroundColor,
+                              },
+                            ]}
                             placeholder="Address"
                             placeholderTextColor="gray"
                             onChangeText={handleChange('address')}
@@ -191,7 +208,17 @@ const Signup = ({navigation}: {navigation: any}) => {
                         <View style={styles.inputContainer}>
                           <Text style={styles.subtitle}>Email</Text>
                           <TextInput
-                            style={styles.input}
+                            style={[
+                              styles.input,
+                              {
+                                borderWidth:
+                                  errors.email && touched.email ? 1 : 0,
+                                borderColor:
+                                  errors.email && touched.email
+                                    ? secondary
+                                    : inputbackgroundColor,
+                              },
+                            ]}
                             placeholder="Email"
                             placeholderTextColor="gray"
                             keyboardType="email-address"
@@ -206,7 +233,17 @@ const Signup = ({navigation}: {navigation: any}) => {
                         <View style={styles.inputContainer}>
                           <Text style={styles.subtitle}>Password</Text>
                           <TextInput
-                            style={styles.input}
+                            style={[
+                              styles.input,
+                              {
+                                borderWidth:
+                                  errors.password && touched.password ? 1 : 0,
+                                borderColor:
+                                  errors.password && touched.password
+                                    ? secondary
+                                    : inputbackgroundColor,
+                              },
+                            ]}
                             placeholder="Password"
                             placeholderTextColor="gray"
                             secureTextEntry
@@ -223,7 +260,21 @@ const Signup = ({navigation}: {navigation: any}) => {
                         <View style={styles.inputContainer}>
                           <Text style={styles.subtitle}>Confirm Password</Text>
                           <TextInput
-                            style={styles.input}
+                            style={[
+                              styles.input,
+                              {
+                                borderWidth:
+                                  errors.confirmPassword &&
+                                  touched.confirmPassword
+                                    ? 1
+                                    : 0,
+                                borderColor:
+                                  errors.confirmPassword &&
+                                  touched.confirmPassword
+                                    ? secondary
+                                    : inputbackgroundColor,
+                              },
+                            ]}
                             placeholder="Confirm Password"
                             placeholderTextColor="gray"
                             secureTextEntry
@@ -254,7 +305,6 @@ const Signup = ({navigation}: {navigation: any}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 50,
     paddingHorizontal: 15,
   },
   scrollview: {
@@ -265,7 +315,8 @@ const styles = StyleSheet.create({
     width: '100%',
     flex: 1,
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 100,
+    justifyContent: 'center',
   },
   signup: {
     // backgroundColor: primary,
@@ -278,24 +329,13 @@ const styles = StyleSheet.create({
     borderTopColor: primary,
     borderTopWidth: 6,
     borderRadius: 10,
-    padding: 10,
     marginBottom: 0,
     width: '100%',
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-
-    elevation: 4,
+    height: '95%',
   },
   header: {
     width: '100%',
     height: 100,
-    marginTop: 40,
-    padding: 10,
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
@@ -317,13 +357,10 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 0,
     justifyContent: 'center',
-    marginTop: 50,
   },
   footer: {
     flexDirection: 'row',
     width: '100%',
-    height: 80,
-    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -332,6 +369,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
     textAlign: 'center',
+    marginTop: 40,
   },
   subtitle: {
     fontSize: 16,
